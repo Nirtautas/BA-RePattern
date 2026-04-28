@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="RePattern.Business/RePattern.Business.csproj" Id="f3db3d28-779d-4976-bdfe-eb08cc991e82" />
+  <Project Path="RePattern.Common/RePattern.Common.csproj" Id="5e92426e-2529-498d-85fa-23f0a7766f3c" />
+  <Project Path="RePattern.Data/RePattern.Data.csproj" Id="a7a8dc2d-7583-440c-b8e5-358e22e6fc86" />
+  <Project Path="RePattern.Domain/RePattern.Domain.csproj" Id="817f6c54-fba0-48ab-b234-d02680dc0b72" />
   <Project Path="RePattern/RePattern.csproj" />
 </Solution>
