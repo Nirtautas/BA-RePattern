@@ -45,12 +45,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddScoped<IBadgeAcquisitionRepository, BadgeAcquisitionRepository>()
                 .AddScoped<IBadgeRepository, BadgeRepository>()
                 .AddScoped<IBadgeRuleRepository, BadgeRuleRepository>()
+                .AddScoped<ITestExecutionRepository, TestExecutionRepository>()
                 .AddScoped<ICategoryRepository, CategoryRepository>()
                 .AddScoped<IQuestionAttemptRepository, QuestionAttemptRepository>()
                 .AddScoped<ISelectedAnswersRepository, SelectedAnswersRepository>()
                 .AddScoped<ITestQuestionRepository, TestQuestionRepository>()
                 .AddScoped<ITestRepository, TestRepository>()
-                .AddScoped<IUserRepository, UserRepository>();
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

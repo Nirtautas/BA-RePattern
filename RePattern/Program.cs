@@ -3,13 +3,14 @@ using RePattern.Api.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.ConfigureAuthentication();
+builder
+    .ConfigureSwagger()
+    .ConfigureAuthentication();
 
 builder.Services.AddBusinessServices(builder.Configuration);
 builder.Services.AddDataServices(builder.Configuration);
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
 
 var baseUrl = ConfigUtils.GetRequiredConfigValue(builder.Configuration, "baseUrl");
 builder.WebHost.UseUrls(baseUrl);
@@ -28,7 +29,11 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "RePattern API Version 1");
+    });
 }
 
 app.UseHttpsRedirection();

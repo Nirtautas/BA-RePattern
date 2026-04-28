@@ -35,22 +35,22 @@ namespace RePattern.Api.Configurations
                 };
                 options.Events = new JwtBearerEvents
                 {
-                    OnAuthenticationFailed = async context =>
+                    OnChallenge = async context =>
                     {
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                        context.HandleResponse();
+
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        context.Response.ContentType = "application/json";
+
+                        var isExpired = context.AuthenticateFailure is SecurityTokenExpiredException;
+
+                        var response = new
                         {
-                            context.NoResult();
-                            context.Response.StatusCode = 401;
-                            context.Response.ContentType = "application/json";
+                            message = "Token Expired",
+                            code = "TOKEN_EXPIRED",
+                        };
 
-                            var response = new
-                            {
-                                message = "Token Expired",
-                                code = "TOKEN_EXPIRED",
-                            };
-
-                            await context.Response.WriteAsync(JsonSerializer.Serialize(response));
-                        }
+                        await context.Response.WriteAsync(JsonSerializer.Serialize(response));
                     }
                 };
             });
