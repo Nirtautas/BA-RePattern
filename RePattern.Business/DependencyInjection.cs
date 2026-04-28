@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace RePattern.Business
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DependencyInjection
     {

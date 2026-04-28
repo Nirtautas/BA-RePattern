@@ -1,4 +1,4 @@
-namespace RePattern
+namespace RePattern.Api
 {
     public class WeatherForecast
     {
