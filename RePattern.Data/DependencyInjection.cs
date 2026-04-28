@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using RePattern.Common.Constants;
 using RePattern.Data.Database;
 using RePattern.Data.Identity;
+using RePattern.Data.Repositories.Concrete;
+using RePattern.Data.Repositories.Interfaces;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -37,6 +39,18 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddSignInManager<SignInManager<ApplicationUser>>()
                 .AddDefaultTokenProviders();
+
+            services
+                .AddScoped<IAnswerRepository, AnswerRepository>()
+                .AddScoped<IBadgeAcquisitionRepository, BadgeAcquisitionRepository>()
+                .AddScoped<IBadgeRepository, BadgeRepository>()
+                .AddScoped<IBadgeRuleRepository, BadgeRuleRepository>()
+                .AddScoped<ICategoryRepository, CategoryRepository>()
+                .AddScoped<IQuestionAttemptRepository, QuestionAttemptRepository>()
+                .AddScoped<ISelectedAnswersRepository, SelectedAnswersRepository>()
+                .AddScoped<ITestQuestionRepository, TestQuestionRepository>()
+                .AddScoped<ITestRepository, TestRepository>()
+                .AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }
