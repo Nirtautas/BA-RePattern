@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AutoMapper\" />
     <Folder Include="Dtos\" />
     <Folder Include="Validators\" />
-    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
