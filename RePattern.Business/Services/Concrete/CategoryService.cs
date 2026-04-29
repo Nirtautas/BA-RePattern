@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RePattern.Business.Dtos.Category;
 using RePattern.Business.Services.Interfaces;
+using RePattern.Common.Exceptions.Custom;
 using RePattern.Data.Repositories.Interfaces;
 
 namespace RePattern.Business.Services.Concrete
@@ -18,7 +19,7 @@ namespace RePattern.Business.Services.Concrete
         public async Task<CategoryResponse> GetCategoryByIdAsync(int id, CancellationToken cancellationToken)
         {
             var category = await unitOfWork.CategoryRepository.GetByIdAsync(id, cancellationToken)
-                ?? throw new DirectoryNotFoundException($"Category with id {id} not found");
+                ?? throw new NotFoundException($"Category with id {id} not found");
             var categoryResponse = mapper.Map<CategoryResponse>(category);
 
             return categoryResponse;
@@ -27,7 +28,7 @@ namespace RePattern.Business.Services.Concrete
         public async Task<CategoryResponse> GetCategoryByUniquePathFragmentAsync(string pathFragment, CancellationToken cancellationToken)
         {
             var category = await unitOfWork.CategoryRepository.GetByExpressionAsync(c => String.Equals(c.UniquePathFragment, pathFragment), cancellationToken)
-                ?? throw new DirectoryNotFoundException($"Category with unique path fragment {pathFragment} not found");
+                ?? throw new NotFoundException($"Category with unique path fragment {pathFragment} not found");
             var categoryResponse = mapper.Map<CategoryResponse>(category);
 
             return categoryResponse;

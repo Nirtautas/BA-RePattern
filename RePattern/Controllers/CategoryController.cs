@@ -28,7 +28,7 @@ namespace RePattern.Api.Controllers
         [HttpGet("by-path/{uniqueCategoryFragment}")]
         public async Task<IActionResult> GetCategoryByUniquePathFragmentAsync(string uniqueCategoryFragment, CancellationToken cancellationToken)
         {
-            var response = await categoryService.GetAllCategoriesAsync(cancellationToken);
+            var response = await categoryService.GetCategoryByUniquePathFragmentAsync(uniqueCategoryFragment, cancellationToken);
             return Ok(response);
         }
     }
