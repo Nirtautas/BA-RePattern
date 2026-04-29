@@ -13,7 +13,7 @@ export default function MuiThemeProvider({ children }: { children: React.ReactNo
     palette: {
       primary: {
         main: "#424C55",
-        light: "#BEBEBE",
+        light: "#F5EDF0",
       },
       success: {
         main: "#6BA368",
