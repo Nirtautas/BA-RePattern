@@ -37,7 +37,7 @@ namespace RePattern.Api.Configurations
                 {
                     OnMessageReceived = context =>
                     {
-                        context.Token = context.Request.Cookies["jwt_token"];
+                        context.Token = context.Request.Cookies["access_token"];
                         return Task.CompletedTask;
                     },
 

@@ -10,7 +10,7 @@ namespace RePattern.Api.Controllers
     public class AuthController(IAuthService authService) : ControllerBase
     {
         [AllowAnonymous]
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public async Task<IActionResult> LoginUserAsync([FromBody] UserLoginRequest credentials, CancellationToken cancellationToken)
         {
             var response = await authService.LoginUserAsync(credentials, cancellationToken);
@@ -28,7 +28,7 @@ namespace RePattern.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("/register")]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterUserAsync([FromBody] UserRegisterRequest request, CancellationToken cancellationToken)
         {
             var response = await authService.RegisterUserAsync(request, cancellationToken);
@@ -36,7 +36,7 @@ namespace RePattern.Api.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("logout")]
         public async Task<IActionResult> Logout(CancellationToken cancellationToken)
         {
             Response.Cookies.Delete("access_token");

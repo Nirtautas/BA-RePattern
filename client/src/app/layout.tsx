@@ -1,6 +1,7 @@
 import Footer from "@/components/templates/footer";
 import MuiThemeProvider from "@/components/templates/mui";
 import NavBar from "@/components/templates/navBar";
+import TanStackProvider from "@/data/api/providers/TanStackProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
 import { Abril_Fatface, Geist, Geist_Mono } from "next/font/google";
@@ -43,13 +44,15 @@ export default function RootLayout({
           margin: 0,
         }}
       >
-        <AppRouterCacheProvider>
-          <MuiThemeProvider>
-            <NavBar />
-            {children}
-            <Footer />
-          </MuiThemeProvider>
-        </AppRouterCacheProvider>
+        <TanStackProvider>
+          <AppRouterCacheProvider>
+            <MuiThemeProvider>
+              <NavBar />
+              {children}
+              <Footer />
+            </MuiThemeProvider>
+          </AppRouterCacheProvider>
+        </TanStackProvider>
       </body>
     </html>
   );

@@ -10,7 +10,7 @@ namespace RePattern.Api.Controllers
     public class UserController(IUserService userService) : ControllerBase
     {
         [Authorize]
-        [HttpGet("/current-user")]
+        [HttpGet("current-user")]
         public async Task<ActionResult<UserResponse>> GetCurrentUserAsync(CancellationToken cancellationToken)
         {
             var user = await userService.GetCurrentUserAsync(User, cancellationToken);

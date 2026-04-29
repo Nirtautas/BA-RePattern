@@ -2,33 +2,41 @@
 
 import { AppTitle } from "@/components/shared/simpleShared";
 import SubheadingBold from "@/components/shared/subheadingBold";
+import { useLogin } from "@/data/api/features/auth/authHooks";
+import { UserLoginRequest } from "@/data/api/features/auth/authTypes";
 import { getPageUrl } from "@/data/constants";
-import { UserLoginRequest } from "@/data/types";
 import { EmailOutlined, LockOutlined } from "@mui/icons-material";
 import { Box, Button, Container, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { SubmitEventHandler, useState } from "react";
+import { FormEvent, useState } from "react";
 
 const LoginPage = () => {
   const router = useRouter();
+  const loginMutation = useLogin();
+
   const [loginCredentials, setLoginCredentials] = useState<UserLoginRequest>({
     username: "",
     password: "",
   });
 
-  const handleLogin: SubmitEventHandler<HTMLFormElement> = (event) => {
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(loginCredentials);
+    try {
+      await loginMutation.mutateAsync(loginCredentials);
+      router.push(getPageUrl.learnDashboard());
+    } catch {}
   };
 
   return (
     <Container maxWidth="sm">
       <Box component="form" onSubmit={handleLogin}>
-        <Paper elevation={3} sx={{ p: 3 }}>
+        <Paper elevation={3} sx={{ padding: 3 }}>
           <Stack spacing={2} textAlign="center">
             <AppTitle />
             <SubheadingBold headingText="Login into your account" />
             <Divider />
+
+            {loginMutation.isError && <Typography color="error">{loginMutation.error.message}</Typography>}
 
             <TextField
               label="Username"
@@ -79,8 +87,8 @@ const LoginPage = () => {
               Forgot your password?
             </Typography>
 
-            <Button type="submit" variant="contained">
-              Login
+            <Button type="submit" variant="contained" disabled={loginMutation.isPending}>
+              {loginMutation.isPending ? "Logging in..." : "Login"}
             </Button>
 
             <Typography>
