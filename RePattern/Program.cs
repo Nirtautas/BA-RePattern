@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Diagnostics;
 using RePattern.Api.Configurations;
 using RePattern.Api.Utils;
 
@@ -7,6 +8,7 @@ builder
     .ConfigureSwagger()
     .ConfigureAuthentication();
 
+builder.Services.AddApiServices(builder.Configuration);
 builder.Services.AddBusinessServices(builder.Configuration);
 builder.Services.AddDataServices(builder.Configuration);
 
@@ -17,11 +19,13 @@ builder.WebHost.UseUrls(baseUrl);
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("FrontEnd", policy =>
     {
-        policy.AllowAnyOrigin();
-        policy.AllowAnyHeader();
-        policy.AllowAnyMethod();
+        policy
+        .WithOrigins(ConfigUtils.GetRequiredConfigValue(builder.Configuration, "FrontEndBaseUrl"))
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
     });
 });
 
@@ -36,9 +40,23 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseExceptionHandler(new ExceptionHandlerOptions
+{
+    ExceptionHandler = async context =>
+    {
+        var exception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
+
+        if (exception != null)
+        {
+            var handler = context.RequestServices.GetRequiredService<GlobalExceptionHandler>();
+            await handler.TryHandleAsync(context, exception, CancellationToken.None);
+        }
+    }
+});
+
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors();
+app.UseCors("FrontEnd");
 
 app.UseAuthentication();
 app.UseAuthorization();

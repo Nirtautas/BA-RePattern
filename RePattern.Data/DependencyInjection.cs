@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RePattern.Common.Constants;
 using RePattern.Data.Database;
+using RePattern.Data.Database.Seeders;
 using RePattern.Data.Identity;
 using RePattern.Data.Repositories.Concrete;
 using RePattern.Data.Repositories.Interfaces;
@@ -13,12 +14,17 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddDataServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var databaseConnectionString = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("REPATTERN_DATABASE_URL"))
-                ? configuration.GetConnectionString("RePatternDatabaseConnection")
-                : null;
+            var databaseConnectionString = Environment.GetEnvironmentVariable("REPATTERN_DATABASE_URL") ?? configuration.GetConnectionString("RePatternDatabaseConnection");
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(databaseConnectionString, npgsqlOptionsAction => npgsqlOptionsAction.MigrationsAssembly("RePattern.Data")));
+            {
+                options.UseNpgsql(databaseConnectionString, npgsqlOptionsAction => npgsqlOptionsAction.MigrationsAssembly("RePattern.Data"));
+                options.UseSeeding(async (context, hasSchema) =>
+                {
+                    var appContext = (ApplicationDbContext)context;
+                    DatabaseSeeder.Seed(appContext);
+                });
+            });
 
             services.AddIdentityCore<ApplicationUser>(options =>
             {

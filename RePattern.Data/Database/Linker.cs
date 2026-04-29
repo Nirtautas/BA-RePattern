@@ -15,6 +15,10 @@ namespace RePattern.Data.Database
 
         private static void LinkEntities(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Category>()
+                .HasIndex(c => c.UniquePathFragment)
+                .IsUnique();
+
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany<TestExecution>()
                 .WithOne()

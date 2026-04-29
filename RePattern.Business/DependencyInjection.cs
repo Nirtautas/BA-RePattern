@@ -2,6 +2,8 @@
 using RePattern.Business.AutoMapper;
 using RePattern.Business.Services.Concrete;
 using RePattern.Business.Services.Interfaces;
+using RePattern.Business.Utils;
+using RePattern.Business.Utils.Interfaces;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,7 +13,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfile>());
             services
+                .AddScoped<IJwtTokenGenerator, JwtTokenGenerator>()
                 .AddScoped<IAuthService, AuthService>()
+                .AddScoped<IUserService, UserService>()
                 .AddScoped<ICategoryService, CategoryService>();
 
             return services;

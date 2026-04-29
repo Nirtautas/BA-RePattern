@@ -35,6 +35,12 @@ namespace RePattern.Api.Configurations
                 };
                 options.Events = new JwtBearerEvents
                 {
+                    OnMessageReceived = context =>
+                    {
+                        context.Token = context.Request.Cookies["jwt_token"];
+                        return Task.CompletedTask;
+                    },
+
                     OnChallenge = async context =>
                     {
                         context.HandleResponse();
@@ -46,8 +52,8 @@ namespace RePattern.Api.Configurations
 
                         var response = new
                         {
-                            message = "Token Expired",
-                            code = "TOKEN_EXPIRED",
+                            message = isExpired ? "Token Expired" : "Unauthorized",
+                            code = isExpired ? "TOKEN_EXPIRED" : "UNAUTHORIZED",
                         };
 
                         await context.Response.WriteAsync(JsonSerializer.Serialize(response));

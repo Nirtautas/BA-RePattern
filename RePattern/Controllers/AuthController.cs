@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RePattern.Business.Dtos.Auth;
 using RePattern.Business.Services.Interfaces;
 
 namespace RePattern.Api.Controllers
@@ -7,6 +9,38 @@ namespace RePattern.Api.Controllers
     [ApiController]
     public class AuthController(IAuthService authService) : ControllerBase
     {
+        [AllowAnonymous]
+        [HttpPost("/login")]
+        public async Task<IActionResult> LoginUserAsync([FromBody] UserLoginRequest credentials, CancellationToken cancellationToken)
+        {
+            var response = await authService.LoginUserAsync(credentials, cancellationToken);
 
+            Response.Cookies.Append("access_token", response.JwtToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTimeOffset.UtcNow.AddHours(1),
+                Path = "/"
+            });
+
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("/register")]
+        public async Task<IActionResult> RegisterUserAsync([FromBody] UserRegisterRequest request, CancellationToken cancellationToken)
+        {
+            var response = await authService.RegisterUserAsync(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Logout(CancellationToken cancellationToken)
+        {
+            Response.Cookies.Delete("access_token");
+            return NoContent();
+        }
     }
 }
