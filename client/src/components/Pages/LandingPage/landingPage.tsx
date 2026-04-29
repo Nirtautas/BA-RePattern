@@ -1,11 +1,13 @@
-import { Container, Typography} from "@mui/material";
+"use client";
+
+import { Container, Typography } from "@mui/material";
 
 const HomePage = () => {
-    return (
-        <Container>
-            <Typography>Landing Page</Typography>
-        </Container>
-    );
+  return (
+    <Container>
+      <Typography>Landing Page</Typography>
+    </Container>
+  );
 };
 
 export default HomePage;
