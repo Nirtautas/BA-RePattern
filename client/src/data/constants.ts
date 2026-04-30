@@ -11,3 +11,4 @@ export const getPageUrl = {
 
 export const API_BASE_URL = "https://localhost:5000/api"
 export const UNAUTHORIZED = "UNAUTHORIZED"
+export const INTERACTIVE_WEBSITE_URL = "https://ba-usability-study-website-repatter.vercel.app";

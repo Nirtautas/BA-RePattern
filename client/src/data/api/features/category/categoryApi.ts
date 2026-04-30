@@ -9,8 +9,8 @@ const getCategoryById = (categoryId: number) => {
   return apiClient<CategoryResponse>(`/categories/${categoryId}`);
 }
 
-const getCategoryByPath = (uniquePathFragment: string) => {
+const getCategoryByPathFragment = (uniquePathFragment: string) => {
   return apiClient<CategoryResponse>(`/categories/by-path/${uniquePathFragment}`);
 }
 
-export { getCategories, getCategoryById, getCategoryByPath };
+export { getCategories, getCategoryById, getCategoryByPathFragment };

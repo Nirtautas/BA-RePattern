@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { loginUser, logoutUser } from "./authApi";
+import { loginUser, registerUser, logoutUser } from "./authApi";
 import { userKeys } from "../user/userHooks";
 
-export function useLogin() {
+const useLogin = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -14,7 +14,15 @@ export function useLogin() {
   });
 }
 
-export function useLogout() {
+const useRegister = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: registerUser,
+  });
+}
+
+const useLogout = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -26,3 +34,5 @@ export function useLogout() {
     },
   });
 }
+
+export {useLogin, useRegister, useLogout};

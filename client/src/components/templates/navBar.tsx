@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
 import { AppTitle } from "../shared/simpleShared";
 
-export function NavBar() {
+const NavBar = () => {
   const router = useRouter();
   const logoutMutation = useLogout();
   const { data: user, isLoading } = useCurrentUser();
@@ -105,7 +105,7 @@ export function NavBar() {
                   Profile
                 </MenuItem>
 
-                <MenuItem onClick={handleLogout}>
+                <MenuItem onClick={handleLogout} sx={{ color: "error.main" }}>
                   <LogoutOutlined sx={{ marginRight: 1 }} />
                   Logout
                 </MenuItem>
@@ -116,6 +116,6 @@ export function NavBar() {
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 export default NavBar;

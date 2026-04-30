@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCategories, getCategoryById, getCategoryByPath } from "./categoryApi";
+import { getCategories, getCategoryById, getCategoryByPathFragment } from "./categoryApi";
 
 const categoryKeys = {
   all: ["categories"] as const,
   byId: (id: number) => ["categories", id] as const,
-  byUniquePath: (path: string) => ["categories", "by-path", path] as const,
+  byUniquePathFragment: (path: string) => ["categories", "by-path", path] as const,
 };
 
 const useCategories = () => {
@@ -22,12 +22,12 @@ const useCategoryById = (categoryId: number) => {
   });
 }
 
-const useCategoryByUniquePath = (uniquePathFragment: string) => {
+const useCategoryByUniquePathFragment = (uniquePathFragment: string) => {
   return useQuery({
-    queryKey: categoryKeys.byUniquePath(uniquePathFragment),
-    queryFn: () => getCategoryByPath(uniquePathFragment),
+    queryKey: categoryKeys.byUniquePathFragment(uniquePathFragment),
+    queryFn: () => getCategoryByPathFragment(uniquePathFragment),
     enabled: !!uniquePathFragment,
   });
 }
 
-export { categoryKeys, useCategories, useCategoryById, useCategoryByUniquePath };
+export { categoryKeys, useCategories, useCategoryById, useCategoryByUniquePathFragment };

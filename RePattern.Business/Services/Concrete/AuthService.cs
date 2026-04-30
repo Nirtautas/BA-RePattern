@@ -42,7 +42,12 @@ namespace RePattern.Business.Services.Concrete
             bool emailAlreadyExists = await userManager.Users.AnyAsync(u => u.Email == registerUser.Email);
 
             if (emailAlreadyExists)
-                throw new BadRequestException($"There is already an account registered to {registerUser.Email}!");
+                throw new BadRequestException($"There is already an account registered to - {registerUser.Email}!");
+
+            bool usernameAlreadyExists = await userManager.Users.AnyAsync(u => u.UserName == registerUser.UserName);
+
+            if (usernameAlreadyExists)
+                throw new BadRequestException($"Username \"{registerUser.UserName}\" is already taken!");
 
             if (registerUser.Password != registerUser.RepeatPassword)
                 throw new BadRequestException($"The entered passwords do not match!");

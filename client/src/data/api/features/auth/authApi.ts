@@ -1,8 +1,16 @@
 import apiClient from "../../apiClient";
-import { UserLoginRequest, UserLoginResponse } from "./authTypes";
+import { UserResponse } from "../user/userTypes";
+import { UserLoginRequest, UserLoginResponse, UserRegisterRequest } from "./authTypes";
 
 const loginUser = (request: UserLoginRequest) => {
   return apiClient<UserLoginResponse>("/auth/login", {
+    method: "POST",
+    body: JSON.stringify(request),
+  });
+}
+
+const registerUser = (request: UserRegisterRequest) => {
+  return apiClient<UserResponse>("/auth/register", {
     method: "POST",
     body: JSON.stringify(request),
   });
@@ -14,4 +22,4 @@ const logoutUser = () => {
   });
 }
 
-export {loginUser, logoutUser};
+export {loginUser, registerUser, logoutUser};

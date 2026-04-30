@@ -3,9 +3,9 @@
 import { getPageUrl } from "@/data/constants";
 import { Link, Paper, Stack, Typography } from "@mui/material";
 
-export function Footer() {
+const Footer = () => {
   return (
-    <Paper component="footer" sx={{ bgcolor: "primary.main", color: "primary.light", marginTop: 1, borderRadius: 0, padding: 1 }}>
+    <Paper component="footer" sx={{ bgcolor: "primary.main", color: "primary.light", borderRadius: 0, padding: 1 }}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack direction="column" justifyContent="center">
           <Typography>
@@ -21,6 +21,6 @@ export function Footer() {
       </Stack>
     </Paper>
   );
-}
+};
 
 export default Footer;

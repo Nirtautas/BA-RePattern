@@ -8,3 +8,10 @@ export type UserLoginResponse = {
   userName: string;
   jwtToken: string;
 };
+
+export type UserRegisterRequest = {
+  userName: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+};
