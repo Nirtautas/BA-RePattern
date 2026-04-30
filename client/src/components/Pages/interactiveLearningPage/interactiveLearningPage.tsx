@@ -4,6 +4,7 @@ import { getPageUrl, INTERACTIVE_WEBSITE_URL } from "@/data/constants";
 import { Box, Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import { darken } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type Props = {
   category: CategoryResponse;
@@ -11,6 +12,14 @@ type Props = {
 
 const InteractiveLearningPage = ({ category }: Props) => {
   const router = useRouter();
+
+  useEffect(() => {
+    if (category.onlyTheory) {
+      router.replace(`${getPageUrl.learnDashboard()}/${category.uniquePathFragment}/theory`);
+    }
+  }, [category, router]);
+
+  if (category.onlyTheory) return null;
 
   return (
     <Paper sx={{ padding: 2, height: "100%", border: 1, borderColor: "primary.main", display: "flex", flexDirection: "column" }}>

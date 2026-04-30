@@ -22,9 +22,7 @@ const SideBar = () => {
   return (
     <Paper square sx={{ width: 360, borderRight: 1, borderColor: "primary.main" }}>
       <Box padding={2}>
-        <Typography variant="h4" color="text.secondary">
-          Learning Topics:
-        </Typography>
+        <Typography variant="h4">Learning Topics:</Typography>
       </Box>
 
       <Divider sx={{ bgcolor: "primary.main" }} />
