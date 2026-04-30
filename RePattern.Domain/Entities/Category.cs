@@ -17,6 +17,6 @@ namespace RePattern.Domain.Entities
         public bool OnlyTheory { get; set; }
 
         public virtual Test Test { get; set; }
-        public virtual ICollection<Badge> Badges { get; set; }
+        public virtual ICollection<BadgeGroup> BadgeGroups { get; set; }
     }
 }

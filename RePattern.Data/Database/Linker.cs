@@ -30,6 +30,11 @@ namespace RePattern.Data.Database
                 .WithOne()
                 .HasForeignKey(a => a.UserId)
                 .IsRequired();
+
+            modelBuilder.Entity<BadgeGroup>()
+                .HasIndex(x => new { x.CategoryId, x.IsTrackingGroup })
+                .IsUnique()
+                .HasFilter("\"IsTrackingGroup\" = true AND \"CategoryId\" IS NOT NULL");
         }
 
         private static void SetDefaults(ModelBuilder modelBuilder)
@@ -56,10 +61,6 @@ namespace RePattern.Data.Database
 
             modelBuilder.Entity<Badge>()
                 .Property(q => q.ImageURL)
-                .HasDefaultValue(null);
-
-            modelBuilder.Entity<Badge>()
-                .Property(q => q.CategoryId)
                 .HasDefaultValue(null);
 
             modelBuilder.Entity<BadgeRule>()

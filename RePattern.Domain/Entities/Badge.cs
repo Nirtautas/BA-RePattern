@@ -12,11 +12,12 @@ namespace RePattern.Domain.Entities
 
         [MaxLength(255)]
         public required string Title { get; set; }
+        public string? Description { get; set; }
         public BadgeTierEnum Tier { get; set; }
         public string? ImageURL { get; set; }
 
-        public int? CategoryId { get; set; }
-        public virtual Category? Category { get; set; }
+        public required int BadgeGroupId { get; set; }
+        public BadgeGroup BadgeGroup { get; set; }
         public required int BadgeRuleId { get; set; }
         public virtual BadgeRule BadgeRule { get; set; }
     }

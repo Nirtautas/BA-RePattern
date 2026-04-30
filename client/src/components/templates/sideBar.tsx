@@ -1,5 +1,6 @@
 "use client";
 
+import { useAllHighestReceivedBadges } from "@/data/api/features/badgeAcquisition/badgeAcquisitionHooks";
 import { useCategories } from "@/data/api/features/category/categoryHooks";
 import { CategoryResponse } from "@/data/api/features/category/categoryTypes";
 import { getPageUrl } from "@/data/constants";
@@ -10,6 +11,11 @@ import { useRouter } from "next/navigation";
 const SideBar = () => {
   const router = useRouter();
   const { data: categories, isLoading } = useCategories();
+  const { data: badges } = useAllHighestReceivedBadges();
+
+  const getTrackingBadgeForCategory = (categoryId: number) => {
+    return badges?.find((b) => b.categoryId === categoryId && b.isTrackingGroup);
+  };
 
   const navigateToLearningTopic = (category: CategoryResponse) => {
     if (category.onlyTheory) {
@@ -30,12 +36,19 @@ const SideBar = () => {
       <List disablePadding>
         {isLoading && <ListItemText sx={{ padding: 2 }} primary="Loading learning topics..." />}
 
-        {categories?.map((category) => (
-          <ListItemButton key={category.id} onClick={() => navigateToLearningTopic(category)} sx={{ borderBottom: 1, borderColor: "primary.main" }}>
-            <ListItemText primary={category.title} />
-            <ChevronRight fontSize="small" />
-          </ListItemButton>
-        ))}
+        {categories?.map((category) => {
+          const trackingBadge = getTrackingBadgeForCategory(category.id);
+
+          return (
+            <ListItemButton key={category.id} onClick={() => navigateToLearningTopic(category)} sx={{ borderBottom: 1, borderColor: "primary.main" }}>
+              <ListItemText primary={category.title} />
+
+              {trackingBadge && <Typography>{trackingBadge.tier}</Typography>}
+
+              <ChevronRight fontSize="small" />
+            </ListItemButton>
+          );
+        })}
       </List>
     </Paper>
   );

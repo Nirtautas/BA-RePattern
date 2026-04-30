@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RePattern.Data.Database;
@@ -11,9 +12,11 @@ using RePattern.Data.Database;
 namespace RePattern.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260430134043_Badges")]
+    partial class Badges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,6 +272,9 @@ namespace RePattern.Data.Migrations
                     b.Property<int>("BadgeRuleId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -288,6 +294,8 @@ namespace RePattern.Data.Migrations
                     b.HasIndex("BadgeGroupId");
 
                     b.HasIndex("BadgeRuleId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Badge");
                 });
@@ -609,9 +617,15 @@ namespace RePattern.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("RePattern.Domain.Entities.Category", "Category")
+                        .WithMany("Badges")
+                        .HasForeignKey("CategoryId");
+
                     b.Navigation("BadgeGroup");
 
                     b.Navigation("BadgeRule");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("RePattern.Domain.Entities.BadgeAcquisition", b =>
@@ -634,7 +648,7 @@ namespace RePattern.Data.Migrations
             modelBuilder.Entity("RePattern.Domain.Entities.BadgeGroup", b =>
                 {
                     b.HasOne("RePattern.Domain.Entities.Category", "Category")
-                        .WithMany("BadgeGroups")
+                        .WithMany()
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
@@ -732,7 +746,7 @@ namespace RePattern.Data.Migrations
 
             modelBuilder.Entity("RePattern.Domain.Entities.Category", b =>
                 {
-                    b.Navigation("BadgeGroups");
+                    b.Navigation("Badges");
 
                     b.Navigation("Test")
                         .IsRequired();

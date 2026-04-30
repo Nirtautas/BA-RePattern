@@ -16,7 +16,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddScoped<IJwtTokenGenerator, JwtTokenGenerator>()
                 .AddScoped<IAuthService, AuthService>()
                 .AddScoped<IUserService, UserService>()
-                .AddScoped<ICategoryService, CategoryService>();
+                .AddScoped<ICategoryService, CategoryService>()
+                .AddScoped<IBadgeService, BadgeService>()
+                .AddScoped<IBadgeAcquisitionService, BadgeAcquisitionService>();
 
             return services;
         }

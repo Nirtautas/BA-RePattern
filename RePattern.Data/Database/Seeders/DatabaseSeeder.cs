@@ -4,7 +4,11 @@
     {
         private static readonly IEnumerable<IDataSeeder> Seeders = new List<IDataSeeder>()
         {
-            new CategorySeeder()
+            new CategorySeeder(),
+            new BadgeGroupSeeder(),
+            new BadgeRuleSeeder(),
+            new BadgeSeeder(),
+            new BadgeAcquisitionSeeder() //REMOVE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!
         };
 
         public static void Seed(ApplicationDbContext context)

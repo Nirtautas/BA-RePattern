@@ -15,6 +15,7 @@ namespace RePattern.Data.Database
         public DbSet<TestExecution> TestExecutions { get; set; }
         public DbSet<QuestionAttempt> QuestionAttempts { get; set; }
         public DbSet<SelectedAnswers> SelectedAnswers { get; set; }
+        public DbSet<BadgeGroup> BadgeGroups { get; set; }
         public DbSet<Badge> Badges { get; set; }
         public DbSet<BadgeRule> BadgeRules { get; set; }
         public DbSet<BadgeAcquisition> BadgeAcquisitions { get; set; }

@@ -49,6 +49,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services
                 .AddScoped<IAnswerRepository, AnswerRepository>()
                 .AddScoped<IBadgeAcquisitionRepository, BadgeAcquisitionRepository>()
+                .AddScoped<IBadgeGroupRepository, BadgeGroupRepository>()
                 .AddScoped<IBadgeRepository, BadgeRepository>()
                 .AddScoped<IBadgeRuleRepository, BadgeRuleRepository>()
                 .AddScoped<ITestExecutionRepository, TestExecutionRepository>()
