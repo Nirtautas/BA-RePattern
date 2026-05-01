@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { loginUser, registerUser, logoutUser } from "./authApi";
+import { loginUser, registerUser, logoutUser, forgotPassword, resetPassword } from "./authApi";
 import { userKeys } from "../user/userHooks";
 import { badgeAcquisitionKeys } from "../badgeAcquisition/badgeAcquisitionHooks";
 
@@ -16,8 +16,6 @@ const useLogin = () => {
 }
 
 const useRegister = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: registerUser,
   });
@@ -42,4 +40,16 @@ const useLogout = () => {
   });
 }
 
-export {useLogin, useRegister, useLogout};
+const useForgotPassword = () => {
+  return useMutation({
+    mutationFn: forgotPassword,
+  });
+}
+
+const useResetPassword = () => {
+  return useMutation({
+    mutationFn: resetPassword,
+  });
+}
+
+export {useLogin, useRegister, useLogout, useForgotPassword, useResetPassword};

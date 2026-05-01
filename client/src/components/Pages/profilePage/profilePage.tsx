@@ -1,10 +1,11 @@
 "use client";
 
+import WrapPaper, { DividerDark } from "@/components/shared/simpleShared";
 import { useLogout } from "@/data/api/features/auth/authHooks";
 import { useCurrentUser } from "@/data/api/features/user/userHooks";
 import { getPageUrl } from "@/data/constants";
 import { FiberManualRecord } from "@mui/icons-material";
-import { Button, Container, Divider, List, ListItem, ListItemIcon, ListItemText, Paper, Stack, Typography } from "@mui/material";
+import { Button, Container, List, ListItem, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 
@@ -24,7 +25,7 @@ const ProfilePage = () => {
 
   return (
     <Container maxWidth="md">
-      <Paper sx={{ padding: 2, marginTop: 2 }}>
+      <WrapPaper>
         <Stack spacing={2}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography variant="h4">User profile:</Typography>
@@ -34,7 +35,7 @@ const ProfilePage = () => {
             </Button>
           </Stack>
 
-          <Divider />
+          <DividerDark />
 
           <List>
             <ListItem>
@@ -59,7 +60,7 @@ const ProfilePage = () => {
             </ListItem>
           </List>
         </Stack>
-      </Paper>
+      </WrapPaper>
     </Container>
   );
 };

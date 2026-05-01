@@ -1,7 +1,7 @@
-import { ToLearningEnvironment } from "@/components/shared/simpleShared";
+import WrapPaper, { DividerDark, ToLearningEnvironment } from "@/components/shared/simpleShared";
 import { CategoryResponse } from "@/data/api/features/category/categoryTypes";
 import { getPageUrl, INTERACTIVE_WEBSITE_URL } from "@/data/constants";
-import { Box, Button, Divider, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { darken } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
   if (category.onlyTheory) return null;
 
   return (
-    <Paper sx={{ padding: 2, height: "100%", border: 1, borderColor: "primary.main", display: "flex", flexDirection: "column" }}>
+    <WrapPaper sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <Stack direction="column" gap={1} flex={1}>
         <ToLearningEnvironment theory={false} category={category} />
 
@@ -36,7 +36,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
               </Button>
             </Stack>
           </Stack>
-          <Divider sx={{ bgcolor: "primary.main" }} />
+          <DividerDark />
         </Stack>
 
         <Box border={1} borderRadius={2} padding={0.5} flex={1} overflow="hidden">
@@ -44,7 +44,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
         </Box>
 
         <Stack direction="column" gap={1} paddingBottom={1}>
-          <Divider sx={{ bgcolor: "primary.main" }} />
+          <DividerDark />
           <Stack direction="row" display="flex" justifyContent="right" alignItems="center" gap={1}>
             <Typography variant="h5">Want to learn more?</Typography>
             <Button
@@ -62,7 +62,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
           </Stack>
         </Stack>
       </Stack>
-    </Paper>
+    </WrapPaper>
   );
 };
 

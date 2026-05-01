@@ -1,12 +1,12 @@
 "use client";
 
-import { AppTitle } from "@/components/shared/simpleShared";
+import WrapPaper, { AppTitle, DividerDark } from "@/components/shared/simpleShared";
 import SubheadingBold from "@/components/shared/subheadingBold";
 import { useLogin } from "@/data/api/features/auth/authHooks";
 import { UserLoginRequest } from "@/data/api/features/auth/authTypes";
 import { getPageUrl } from "@/data/constants";
 import { EmailOutlined, LockOutlined } from "@mui/icons-material";
-import { Box, Button, Container, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, InputAdornment, Link, Stack, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
@@ -30,11 +30,11 @@ const LoginPage = () => {
   return (
     <Container maxWidth="sm">
       <Box component="form" onSubmit={handleLogin}>
-        <Paper elevation={3} sx={{ padding: 3 }}>
+        <WrapPaper>
           <Stack spacing={2} textAlign="center">
             <AppTitle />
             <SubheadingBold headingText="Login into your account" />
-            <Divider />
+            <DividerDark />
 
             {loginMutation.isError && <Typography color="error">{loginMutation.error.message}</Typography>}
 
@@ -83,7 +83,7 @@ const LoginPage = () => {
               }}
             />
 
-            <Typography fontSize={14} textAlign="right" sx={{ textDecoration: "underline", cursor: "pointer" }} onClick={() => router.push(getPageUrl.resetPassword())}>
+            <Typography fontSize={14} textAlign="right" sx={{ textDecoration: "underline", cursor: "pointer" }} onClick={() => router.push(getPageUrl.forgotPassword())}>
               Forgot your password?
             </Typography>
 
@@ -98,7 +98,7 @@ const LoginPage = () => {
               </Link>
             </Typography>
           </Stack>
-        </Paper>
+        </WrapPaper>
       </Box>
     </Container>
   );

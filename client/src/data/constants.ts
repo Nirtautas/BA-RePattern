@@ -1,6 +1,7 @@
 export const getPageUrl = {
     landing: () => '/',
     login: () => '/login',
+    forgotPassword: () => '/forgot-password',
     resetPassword: () => '/reset-password',
     register: () => '/register',
     profile: () => "/profile",

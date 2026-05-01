@@ -1,12 +1,12 @@
 "use client";
 
-import { AppTitle } from "@/components/shared/simpleShared";
+import WrapPaper, { AppTitle, DividerDark } from "@/components/shared/simpleShared";
 import SubheadingBold from "@/components/shared/subheadingBold";
 import { useLogin, useRegister } from "@/data/api/features/auth/authHooks";
 import { UserRegisterRequest } from "@/data/api/features/auth/authTypes";
 import { getPageUrl } from "@/data/constants";
 import { EmailOutlined, LockOutlined, PersonOutlined } from "@mui/icons-material";
-import { Box, Button, Container, Divider, InputAdornment, Link, Paper, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, InputAdornment, Link, Stack, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
@@ -37,11 +37,11 @@ const RegisterPage = () => {
   return (
     <Container maxWidth="sm">
       <Box component="form" onSubmit={handleRegistration}>
-        <Paper elevation={3} sx={{ padding: 3 }}>
+        <WrapPaper>
           <Stack spacing={2} textAlign="center">
             <AppTitle />
             <SubheadingBold headingText="Create your account!" />
-            <Divider />
+            <DividerDark />
 
             {registerMutation.isError && <Typography color="error">{registerMutation.error.message}</Typography>}
 
@@ -147,7 +147,7 @@ const RegisterPage = () => {
               </Link>
             </Typography>
           </Stack>
-        </Paper>
+        </WrapPaper>
       </Box>
     </Container>
   );

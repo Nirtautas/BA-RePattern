@@ -62,3 +62,26 @@ export const UsageInstructionsPanel = () => {
     </Paper>
   );
 };
+
+type WrapPaperProps = {
+  children: React.ReactNode;
+  sx?: object;
+};
+
+const WrapPaper = ({ children, sx }: WrapPaperProps) => {
+  return (
+    <Paper
+      sx={{
+        padding: 2,
+        marginTop: 2,
+        border: 1,
+        borderColor: "primary.main",
+        ...sx,
+      }}
+    >
+      {children}
+    </Paper>
+  );
+};
+
+export default WrapPaper;

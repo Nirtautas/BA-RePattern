@@ -1,8 +1,9 @@
 "use client";
 
+import WrapPaper, { DividerDark } from "@/components/shared/simpleShared";
 import { BadgeWithCategoryInfo } from "@/data/api/features/badgeAcquisition/badgeAcquisitionTypes";
 import { getBadgeImage } from "@/utils/badgeUtils";
-import { Box, Divider, Paper, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Stack, Tooltip, Typography } from "@mui/material";
 
 type Props = {
   badges?: BadgeWithCategoryInfo[];
@@ -13,10 +14,10 @@ type Props = {
 
 const UserBadgesPanel = ({ badges, isLoading, unreceivedBadges, isUnreceivedLoading }: Props) => {
   return (
-    <Paper sx={{ padding: 2, border: 1, borderColor: "primary.main" }}>
+    <WrapPaper>
       <Stack direction="column" gap={1}>
         <Typography variant="h4">Your badges:</Typography>
-        <Divider sx={{ bgcolor: "primary.main" }} />
+        <DividerDark />
 
         {isLoading && <Typography>Loading badges...</Typography>}
         {!isLoading && (!badges || badges.length === 0) ? (
@@ -34,7 +35,7 @@ const UserBadgesPanel = ({ badges, isLoading, unreceivedBadges, isUnreceivedLoad
         </Stack>
 
         <Typography variant="h4">Left to unlock:</Typography>
-        <Divider sx={{ bgcolor: "primary.main" }} />
+        <DividerDark />
 
         {isUnreceivedLoading && <Typography>Loading badges...</Typography>}
         {!isUnreceivedLoading && (!unreceivedBadges || unreceivedBadges.length === 0) ? (
@@ -54,7 +55,7 @@ const UserBadgesPanel = ({ badges, isLoading, unreceivedBadges, isUnreceivedLoad
           ))}
         </Stack>
       </Stack>
-    </Paper>
+    </WrapPaper>
   );
 };
 

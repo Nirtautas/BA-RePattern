@@ -15,3 +15,13 @@ export type UserRegisterRequest = {
   password: string;
   repeatPassword: string;
 };
+
+export type ForgotPasswordRequest = {
+  email: string;
+};
+
+export type ResetPasswordRequest = {
+  email: string;
+  resetCode: string;
+  newPassword: string;
+};

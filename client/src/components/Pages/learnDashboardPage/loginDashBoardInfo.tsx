@@ -1,9 +1,9 @@
 "use client";
 
-import { DividerDark, UsageInstructionsPanel } from "@/components/shared/simpleShared";
+import WrapPaper, { DividerDark, UsageInstructionsPanel } from "@/components/shared/simpleShared";
 import { useAllHighestReceivedBadges, useAllLowestUnreceivedBadges } from "@/data/api/features/badgeAcquisition/badgeAcquisitionHooks";
 import { useCategories } from "@/data/api/features/category/categoryHooks";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { TopicNavigationPanel } from "./topicNavigationPanel";
 import UserBadgesPanel from "./userBadgesPanel";
 
@@ -32,9 +32,9 @@ const LoginLearnDashboardInfo = () => {
       {!isLoadingContinuePanel && nextCategory && <TopicNavigationPanel title="Continue where you left off?" isLoading={isLoadingContinuePanel} category={nextCategory} />}
 
       {allCategoriesCompleted && (
-        <Paper sx={{ padding: 2, border: 1, borderColor: "success.main" }}>
+        <WrapPaper>
           <Typography variant="h5">Great work! You have completed all learning topics.</Typography>
-        </Paper>
+        </WrapPaper>
       )}
 
       <UserBadgesPanel badges={badges} isLoading={isLoading} unreceivedBadges={unreceivedBadges} isUnreceivedLoading={isUnreceivedLoading} />

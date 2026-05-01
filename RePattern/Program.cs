@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder
     .ConfigureSwagger()
+    .ConfigureGmail()
     .ConfigureAuthentication();
 
 builder.Services.AddApiServices(builder.Configuration);

@@ -1,7 +1,8 @@
 "use client";
 
+import WrapPaper from "@/components/shared/simpleShared";
 import { useCurrentUser } from "@/data/api/features/user/userHooks";
-import { Paper, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import GenericLearnDashboardInfo from "./genericDashBoardInfo";
 import LoginLearnDashboardInfo from "./loginDashBoardInfo";
 
@@ -11,7 +12,7 @@ const LearnDashBoardPage = () => {
 
   if (isUserLoading) return <Typography>Loading...</Typography>;
 
-  return <Paper sx={{ padding: 2, height: "100%", width: "100%", border: 1, borderColor: "primary.main" }}>{isLoggedIn ? <LoginLearnDashboardInfo /> : <GenericLearnDashboardInfo />}</Paper>;
+  return <WrapPaper sx={{ height: "100%", width: "100%" }}>{isLoggedIn ? <LoginLearnDashboardInfo /> : <GenericLearnDashboardInfo />}</WrapPaper>;
 };
 
 export default LearnDashBoardPage;

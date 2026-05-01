@@ -1,10 +1,10 @@
 "use client";
 
-import { DividerDark, UsageInstructionsPanel } from "@/components/shared/simpleShared";
+import WrapPaper, { DividerDark, UsageInstructionsPanel } from "@/components/shared/simpleShared";
 import { useCategories } from "@/data/api/features/category/categoryHooks";
 import { getPageUrl } from "@/data/constants";
 import { FiberManualRecord } from "@mui/icons-material";
-import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { TopicNavigationPanel } from "./topicNavigationPanel";
 
@@ -20,7 +20,7 @@ const GenericLearnDashboardInfo = () => {
         <DividerDark />
       </Stack>
 
-      <Paper sx={{ padding: 2, border: 1 }}>
+      <WrapPaper>
         <Stack direction="column" gap={1}>
           <Typography variant="h4">Login or register to get the most out of “RePattern”</Typography>
           <DividerDark />
@@ -54,7 +54,7 @@ const GenericLearnDashboardInfo = () => {
             </Button>
           </Box>
         </Stack>
-      </Paper>
+      </WrapPaper>
 
       <TopicNavigationPanel title={"Want to just learn instead?"} isLoading={isLoading} category={firstCategory} />
       <UsageInstructionsPanel />
