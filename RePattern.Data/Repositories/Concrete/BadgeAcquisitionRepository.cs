@@ -27,5 +27,24 @@ namespace RePattern.Data.Repositories.Concrete
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task<List<BadgeWithCategoryInfo>> GetLowestUnacquiredBadgesPerGroupAsync(int userId, CancellationToken cancellationToken)
+        {
+            return await _dbContext.Badges
+                .Where(b => !b.BadgeAcquisitions.Any(a => a.UserId == userId))
+                .GroupBy(b => b.BadgeGroupId)
+                .Select(g => g
+                    .OrderBy(b => b.Tier)
+                    .Select(b => new BadgeWithCategoryInfo
+                    {
+                        Badge = b,
+                        CategoryId = b.BadgeGroup.CategoryId,
+                        IsTrackingGroup = b.BadgeGroup.IsTrackingGroup,
+                        AcquiredAt = default
+                    })
+                    .First())
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
+        }
     }
 }

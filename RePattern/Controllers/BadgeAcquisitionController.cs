@@ -13,7 +13,16 @@ namespace RePattern.Api.Controllers
         public async Task<IActionResult> GetAllHighestReceivedBadges(CancellationToken cancellationToken)
         {
             var user = await userService.GetCurrentUserAsync(User, cancellationToken);
-            var response = await badgeAcquisitionService.GetHighestReceivedBadgeFromEachBadgeGroup(user.Id, cancellationToken);
+            var response = await badgeAcquisitionService.GetHighestReceivedBadgeFromEachBadgeGroupAsync(user.Id, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("me/unreceived")]
+        public async Task<IActionResult> GetAllLowestUnreceivedBadges(CancellationToken cancellationToken)
+        {
+            var user = await userService.GetCurrentUserAsync(User, cancellationToken);
+            var response = await badgeAcquisitionService.GetLowestUnreceivedBadgesPerGroupAsync(user.Id, cancellationToken);
             return Ok(response);
         }
     }

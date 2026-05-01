@@ -20,5 +20,6 @@ namespace RePattern.Domain.Entities
         public BadgeGroup BadgeGroup { get; set; }
         public required int BadgeRuleId { get; set; }
         public virtual BadgeRule BadgeRule { get; set; }
+        public virtual ICollection<BadgeAcquisition> BadgeAcquisitions { get; set; }
     }
 }

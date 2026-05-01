@@ -3,7 +3,7 @@ export type BadgeWithCategoryInfo = {
   title: string;
   description: string,
   tier: number,
-  imageUrl: string;
+  imageURL: string;
   acquiredAt: Date;
   categoryId: number;
   isTrackingGroup: boolean;

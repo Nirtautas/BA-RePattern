@@ -5,4 +5,8 @@ const getAllHighestReceivedBadges = () => {
   return apiClient<BadgeWithCategoryInfo[]>("/badge-acquisition/me");
 }
 
-export { getAllHighestReceivedBadges };
+const getAllLowestUnreceivedBadges = () => {
+  return apiClient<BadgeWithCategoryInfo[]>("/badge-acquisition/me/unreceived");
+}
+
+export { getAllHighestReceivedBadges, getAllLowestUnreceivedBadges };

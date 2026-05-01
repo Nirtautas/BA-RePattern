@@ -1,11 +1,12 @@
 "use client";
 
-import { DividerDark, SeeUsageInstructions, ToNewTopic } from "@/components/shared/simpleShared";
+import { DividerDark, UsageInstructionsPanel } from "@/components/shared/simpleShared";
 import { useCategories } from "@/data/api/features/category/categoryHooks";
 import { getPageUrl } from "@/data/constants";
 import { FiberManualRecord } from "@mui/icons-material";
 import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Paper, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { TopicNavigationPanel } from "./topicNavigationPanel";
 
 const GenericLearnDashboardInfo = () => {
   const router = useRouter();
@@ -55,8 +56,8 @@ const GenericLearnDashboardInfo = () => {
         </Stack>
       </Paper>
 
-      <ToNewTopic isLoading={isLoading} newCategory={firstCategory} />
-      <SeeUsageInstructions />
+      <TopicNavigationPanel title={"Want to just learn instead?"} isLoading={isLoading} category={firstCategory} />
+      <UsageInstructionsPanel />
     </Stack>
   );
 };

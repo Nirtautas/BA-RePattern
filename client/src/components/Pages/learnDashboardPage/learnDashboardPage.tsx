@@ -6,11 +6,12 @@ import GenericLearnDashboardInfo from "./genericDashBoardInfo";
 import LoginLearnDashboardInfo from "./loginDashBoardInfo";
 
 const LearnDashBoardPage = () => {
-  const { data: user, isLoading } = useCurrentUser();
+  const { data: user, isLoading: isUserLoading } = useCurrentUser();
+  const isLoggedIn = !!user;
 
-  if (isLoading) return <Typography>Loading...</Typography>;
+  if (isUserLoading) return <Typography>Loading...</Typography>;
 
-  return <Paper sx={{ padding: 2, height: "100%", width: "100%", border: 1, borderColor: "primary.main" }}>{user ? <LoginLearnDashboardInfo /> : <GenericLearnDashboardInfo />}</Paper>;
+  return <Paper sx={{ padding: 2, height: "100%", width: "100%", border: 1, borderColor: "primary.main" }}>{isLoggedIn ? <LoginLearnDashboardInfo /> : <GenericLearnDashboardInfo />}</Paper>;
 };
 
 export default LearnDashBoardPage;

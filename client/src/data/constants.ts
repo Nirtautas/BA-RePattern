@@ -9,6 +9,7 @@ export const getPageUrl = {
     attributions: () => '/attributions'
 }
 
-export const API_BASE_URL = "https://localhost:5000/api"
+export const BACKEND_BASE_URL = "https://localhost:5000"
+export const API_BASE_URL = `${BACKEND_BASE_URL}/api`
 export const UNAUTHORIZED = "UNAUTHORIZED"
 export const INTERACTIVE_WEBSITE_URL = "https://ba-usability-study-website-repatter.vercel.app";

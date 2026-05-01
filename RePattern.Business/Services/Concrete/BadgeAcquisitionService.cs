@@ -7,12 +7,20 @@ namespace RePattern.Business.Services.Concrete
 {
     public class BadgeAcquisitionService(IUnitOfWork unitOfWork, IMapper mapper) : IBadgeAcquisitionService
     {
-        public async Task<List<BadgeWithCategoryResponse>> GetHighestReceivedBadgeFromEachBadgeGroup(int userId, CancellationToken cancellationToken)
+        public async Task<List<BadgeWithCategoryResponse>> GetHighestReceivedBadgeFromEachBadgeGroupAsync(int userId, CancellationToken cancellationToken)
         {
             var receivedBadges = await unitOfWork.BadgeAcquisitionRepository.GetHighestAcquiredBadgesPerGroupAsync(userId, cancellationToken);
-            var categoryResponse = mapper.Map<List<BadgeWithCategoryResponse>>(receivedBadges);
+            var badgeResponse = mapper.Map<List<BadgeWithCategoryResponse>>(receivedBadges);
 
-            return categoryResponse;
+            return badgeResponse;
+        }
+
+        public async Task<List<BadgeWithCategoryResponse>> GetLowestUnreceivedBadgesPerGroupAsync(int userId, CancellationToken cancellationToken)
+        {
+            var unreceivedBadges = await unitOfWork.BadgeAcquisitionRepository.GetLowestUnacquiredBadgesPerGroupAsync(userId, cancellationToken);
+            var badgeResponse = mapper.Map<List<BadgeWithCategoryResponse>>(unreceivedBadges);
+
+            return badgeResponse;
         }
     }
 }

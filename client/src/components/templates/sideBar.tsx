@@ -3,7 +3,9 @@
 import { useAllHighestReceivedBadges } from "@/data/api/features/badgeAcquisition/badgeAcquisitionHooks";
 import { useCategories } from "@/data/api/features/category/categoryHooks";
 import { CategoryResponse } from "@/data/api/features/category/categoryTypes";
+import { useCurrentUser } from "@/data/api/features/user/userHooks";
 import { getPageUrl } from "@/data/constants";
+import { getBadgeImage } from "@/utils/badgeUtils";
 import { ChevronRight } from "@mui/icons-material";
 import { Box, Divider, List, ListItemButton, ListItemText, Paper, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -11,7 +13,9 @@ import { useRouter } from "next/navigation";
 const SideBar = () => {
   const router = useRouter();
   const { data: categories, isLoading } = useCategories();
-  const { data: badges } = useAllHighestReceivedBadges();
+  const { data: user, isLoading: isUserLoading } = useCurrentUser();
+  const isLoggedIn = !!user;
+  const { data: badges } = useAllHighestReceivedBadges(!isUserLoading && isLoggedIn);
 
   const getTrackingBadgeForCategory = (categoryId: number) => {
     return badges?.find((b) => b.categoryId === categoryId && b.isTrackingGroup);
@@ -43,7 +47,7 @@ const SideBar = () => {
             <ListItemButton key={category.id} onClick={() => navigateToLearningTopic(category)} sx={{ borderBottom: 1, borderColor: "primary.main" }}>
               <ListItemText primary={category.title} />
 
-              {trackingBadge && <Typography>{trackingBadge.tier}</Typography>}
+              {trackingBadge && <Box component="img" src={getBadgeImage(trackingBadge)} width={48} height={48} />}
 
               <ChevronRight fontSize="small" />
             </ListItemButton>

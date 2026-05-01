@@ -7,5 +7,6 @@ namespace RePattern.Data.Repositories.Interfaces
     public interface IBadgeAcquisitionRepository : IRepository<BadgeAcquisition>
     {
         Task<List<BadgeWithCategoryInfo>> GetHighestAcquiredBadgesPerGroupAsync(int userId, CancellationToken cancellationToken);
+        Task<List<BadgeWithCategoryInfo>> GetLowestUnacquiredBadgesPerGroupAsync(int userId, CancellationToken cancellationToken);
     }
 }
