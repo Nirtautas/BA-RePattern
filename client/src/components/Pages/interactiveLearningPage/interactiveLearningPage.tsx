@@ -15,7 +15,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
 
   useEffect(() => {
     if (category.onlyTheory) {
-      router.replace(getPageUrl.learnTheory(category.uniquePathFragment));
+      router.push(getPageUrl.learnTheory(category.uniquePathFragment));
     }
   }, [category, router]);
 
@@ -39,7 +39,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
           <DividerDark />
         </Stack>
 
-        <Box border={1} borderRadius={2} flex={1} overflow="hidden">
+        <Box border={2} borderRadius={2} flex={1} overflow="hidden">
           <iframe src={getPageUrl.interactivePage(category.uniquePathFragment)} width="100%" height="100%" style={{ border: "none" }} />
         </Box>
 
