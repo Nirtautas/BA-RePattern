@@ -23,9 +23,9 @@ const SideBar = () => {
 
   const navigateToLearningTopic = (category: CategoryResponse) => {
     if (category.onlyTheory) {
-      router.push(`${getPageUrl.learnDashboard()}/${category.uniquePathFragment}/theory`);
+      router.push(getPageUrl.learnTheory(category.uniquePathFragment));
     } else {
-      router.push(`${getPageUrl.learnDashboard()}/${category.uniquePathFragment}`);
+      router.push(getPageUrl.learnInteractive(category.uniquePathFragment));
     }
   };
 

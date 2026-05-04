@@ -1,6 +1,6 @@
 import WrapPaper, { DividerDark, ToLearningEnvironment } from "@/components/shared/simpleShared";
 import { CategoryResponse } from "@/data/api/features/category/categoryTypes";
-import { getPageUrl, INTERACTIVE_WEBSITE_URL } from "@/data/constants";
+import { getPageUrl } from "@/data/constants";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { darken } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
 
   useEffect(() => {
     if (category.onlyTheory) {
-      router.replace(`${getPageUrl.learnDashboard()}/${category.uniquePathFragment}/theory`);
+      router.replace(getPageUrl.learnTheory(category.uniquePathFragment));
     }
   }, [category, router]);
 
@@ -39,8 +39,8 @@ const InteractiveLearningPage = ({ category }: Props) => {
           <DividerDark />
         </Stack>
 
-        <Box border={1} borderRadius={2} padding={0.5} flex={1} overflow="hidden">
-          <iframe src={INTERACTIVE_WEBSITE_URL} width="100%" height="100%" style={{ border: "none" }} />
+        <Box border={1} borderRadius={2} flex={1} overflow="hidden">
+          <iframe src={getPageUrl.interactivePage(category.uniquePathFragment)} width="100%" height="100%" style={{ border: "none" }} />
         </Box>
 
         <Stack direction="column" gap={1} paddingBottom={1}>
@@ -49,7 +49,7 @@ const InteractiveLearningPage = ({ category }: Props) => {
             <Typography variant="h5">Want to learn more?</Typography>
             <Button
               variant="contained"
-              onClick={() => router.push(`${getPageUrl.learnDashboard()}/${category.uniquePathFragment}/theory`)}
+              onClick={() => router.push(getPageUrl.learnTheory(category.uniquePathFragment))}
               sx={{
                 bgcolor: "success.main",
                 "&:hover": {

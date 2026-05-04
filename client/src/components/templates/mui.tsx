@@ -22,6 +22,9 @@ export default function MuiThemeProvider({ children }: { children: React.ReactNo
       error: {
         main: "#F6303D",
       },
+      info: {
+        main: "#5F56FF",
+      },
     },
     typography: {
       allVariants: { textTransform: "none" },

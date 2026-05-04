@@ -25,7 +25,7 @@ export const ToLearningEnvironment = ({ category, theory = false }: Props) => {
               Back to my learning environment
             </Button>
           ) : (
-            <Button variant="contained" onClick={() => router.push(`${getPageUrl.learnDashboard()}/${category.uniquePathFragment}`)}>
+            <Button variant="contained" onClick={() => router.push(getPageUrl.learnInteractive(category.uniquePathFragment))}>
               Back to interactive exercise
             </Button>
           )}
