@@ -1,4 +1,14 @@
+import ConsumerCenteredGuidelinesTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/consumerCenteredGuidelinesTheory";
 import { BACKEND_BASE_URL } from "./constants";
+import SneakIntoBasketTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/sneakIntoBasketTheory";
+import HiddenCostsTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/hiddenCostsTheory";
+import HiddenSubscriptionTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/hiddenSubscriptionTheory";
+import LimitedTimeMessageTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/limitedTimeMessageTheory";
+import ConfirmshamingTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/confirmshamingTheory";
+import VisualInterferenceTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/visualInterferenceTheory";
+import TrickQuestionsTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/trickQuestionsTheory";
+import HardToCancelTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/hardToCancelTheory";
+import ForcedEnrollmentTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/forcedEnrollmentTheory";
 
 export class ApiError extends Error {
   message: string;
@@ -29,4 +39,18 @@ export const BadgeTierMap: Record<BadgeTierEnum, string> = {
 export type BadgeImageAndTier = {
   imageURL: string;
   tier: BadgeTierEnum;
+};
+
+//If the components are static enough, migrate to MARKDOWN and store in DB!!!!
+export const theoryComponentMap: Partial<Record<string, React.ComponentType | null>> = {
+  "consumer-centered-guidelines": ConsumerCenteredGuidelinesTheory,
+  "sneak-into-basket": SneakIntoBasketTheory,
+  "hidden-costs": HiddenCostsTheory,
+  "hidden-subscription": HiddenSubscriptionTheory,
+  "limited-time-message": LimitedTimeMessageTheory,
+  "confirmshaming": ConfirmshamingTheory,
+  "visual-interference": VisualInterferenceTheory,
+  "trick-questions": TrickQuestionsTheory,
+  "hard-to-cancel": HardToCancelTheory,
+  "forced-enrollment": ForcedEnrollmentTheory,
 };

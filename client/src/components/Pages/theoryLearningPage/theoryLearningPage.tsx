@@ -1,5 +1,6 @@
 import WrapPaper, { ToLearningEnvironment } from "@/components/shared/simpleShared";
 import { CategoryResponse } from "@/data/api/features/category/categoryTypes";
+import { theoryComponentMap } from "@/data/commonTypes";
 import { Typography } from "@mui/material";
 
 type Props = {
@@ -7,11 +8,12 @@ type Props = {
 };
 
 const TheoryLearningPage = ({ category }: Props) => {
+  const Component = theoryComponentMap[category.uniquePathFragment];
+
   return (
     <WrapPaper sx={{ height: "100%" }}>
       <ToLearningEnvironment theory={true} category={category} />
-      <Typography>{category.title}</Typography>
-      <Typography>{category.uniquePathFragment}</Typography>
+      {Component ? <Component /> : <Typography>No theory information exists for {category.uniquePathFragment} unique path fragment.</Typography>}
     </WrapPaper>
   );
 };

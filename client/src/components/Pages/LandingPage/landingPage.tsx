@@ -12,7 +12,7 @@ const LandingPage = () => {
     <Container>
       <Typography>Landing Page</Typography>
       {data?.map((c) => (
-        <Box key={c.id}>{c.title}</Box>
+        <Box key={c.id}>{c.uniquePathFragment}</Box>
       ))}
     </Container>
   );
