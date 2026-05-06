@@ -38,13 +38,17 @@ export const ToLearningEnvironment = ({ category, theory = false }: Props) => {
           </Button>
         </Stack>
       )}
-      <Divider sx={{ bgcolor: "primary.main" }} />
+      <DividerDark />
     </Stack>
   );
 };
 
-export const DividerDark = () => {
-  return <Divider sx={{ bgcolor: "primary.main" }} />;
+type DividerDarkProps = {
+  sx?: object;
+};
+
+export const DividerDark = ({ sx }: DividerDarkProps) => {
+  return <Divider sx={{ bgcolor: "primary.main", ...sx }} />;
 };
 
 export const UsageInstructionsPanel = () => {
@@ -81,6 +85,19 @@ const WrapPaper = ({ children, sx }: WrapPaperProps) => {
     >
       {children}
     </Paper>
+  );
+};
+
+type TheoryTextProps = {
+  children: React.ReactNode;
+  sx?: object;
+};
+
+export const TheoryText = ({ children, sx }: TheoryTextProps) => {
+  return (
+    <Typography fontSize={28} textAlign="justify" sx={{ textIndent: "2em", ...sx }}>
+      {children}
+    </Typography>
   );
 };
 

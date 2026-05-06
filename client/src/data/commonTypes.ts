@@ -9,6 +9,7 @@ import VisualInterferenceTheory from "@/components/Pages/theoryLearningPage/theo
 import TrickQuestionsTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/trickQuestionsTheory";
 import HardToCancelTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/hardToCancelTheory";
 import ForcedEnrollmentTheory from "@/components/Pages/theoryLearningPage/theoryComponents.tsx/forcedEnrollmentTheory";
+import { CategoryResponse } from "./api/features/category/categoryTypes";
 
 export class ApiError extends Error {
   message: string;
@@ -42,7 +43,9 @@ export type BadgeImageAndTier = {
 };
 
 //If the components are static enough, migrate to MARKDOWN and store in DB!!!!
-export const theoryComponentMap: Partial<Record<string, React.ComponentType | null>> = {
+export const theoryComponentMap: Partial<
+  Record<string, React.ComponentType<{ category: CategoryResponse }>>
+> = {
   "consumer-centered-guidelines": ConsumerCenteredGuidelinesTheory,
   "sneak-into-basket": SneakIntoBasketTheory,
   "hidden-costs": HiddenCostsTheory,

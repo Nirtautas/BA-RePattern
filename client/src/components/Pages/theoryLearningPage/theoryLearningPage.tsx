@@ -13,7 +13,7 @@ const TheoryLearningPage = ({ category }: Props) => {
   return (
     <WrapPaper sx={{ height: "100%" }}>
       <ToLearningEnvironment theory={true} category={category} />
-      {Component ? <Component /> : <Typography>No theory information exists for {category.uniquePathFragment} unique path fragment.</Typography>}
+      {Component ? <Component category={category} /> : <Typography>No theory information exists for {category.uniquePathFragment} unique path fragment.</Typography>}
     </WrapPaper>
   );
 };
