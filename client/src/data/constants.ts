@@ -9,8 +9,11 @@ export const getPageUrl = {
     usageInstructions: () => '/instructions',
     attributions: () => '/attributions',
     learnTheory: (uniquePathFragment: string) => `${getPageUrl.learnDashboard()}/${uniquePathFragment}/theory`,
-    learnInteractive: (uniquePathFragment: string) => `${getPageUrl.learnDashboard()}/${uniquePathFragment}`,
+    learnInteractive: (uniquePathFragment: string) => `${getPageUrl.learnDashboard()}/${uniquePathFragment}/interactive`,
     interactivePage: (uniquePathFragment: string) => `${INTERACTIVE_WEBSITE_URL}/${uniquePathFragment}/reset`,
+    categoryTest: (uniquePathFragment: string) => `/tests/category/${uniquePathFragment}`,
+    periodicTest: () => `/tests/periodic/`,
+    testExecutionResult: (executionId: number) => `/tests/execution/${executionId}`,
 };
 
 export const BACKEND_BASE_URL = "https://localhost:5000"
