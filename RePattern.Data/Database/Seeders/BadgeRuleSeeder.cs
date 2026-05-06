@@ -12,10 +12,10 @@ namespace RePattern.Data.Database.Seeders
 
             var badgeRules = new List<BadgeRule>
             {
-                new() { Id = 1, RuleType = BadgeRuleType.CATEGORY_COMPLETE, Threshold = null},
-                new() { Id = 2, RuleType = BadgeRuleType.TEST_SCORE_AT_LEAST, Threshold = 0},
-                new() { Id = 3, RuleType = BadgeRuleType.TEST_SCORE_AT_LEAST, Threshold = 60},
-                new() { Id = 4, RuleType = BadgeRuleType.TEST_SCORE_AT_LEAST, Threshold = 80}
+                new() { Id = 1, RuleType = BadgeRuleTypeEnum.CATEGORY_COMPLETE, Threshold = null},
+                new() { Id = 2, RuleType = BadgeRuleTypeEnum.TEST_SCORE_AT_LEAST, Threshold = 0},
+                new() { Id = 3, RuleType = BadgeRuleTypeEnum.TEST_SCORE_AT_LEAST, Threshold = 60},
+                new() { Id = 4, RuleType = BadgeRuleTypeEnum.TEST_SCORE_AT_LEAST, Threshold = 80}
             };
 
             context.BadgeRules.AddRange(badgeRules);

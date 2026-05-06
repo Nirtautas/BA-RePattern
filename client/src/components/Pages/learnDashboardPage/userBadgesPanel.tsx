@@ -2,8 +2,8 @@
 
 import WrapPaper, { DividerDark } from "@/components/shared/simpleShared";
 import { BadgeWithCategoryInfo } from "@/data/api/features/badgeAcquisition/badgeAcquisitionTypes";
-import { getBadgeImage } from "@/utils/badgeUtils";
-import { Box, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import BadgeGrid from "./badgeGrid";
 
 type Props = {
   badges?: BadgeWithCategoryInfo[];
@@ -26,13 +26,7 @@ const UserBadgesPanel = ({ badges, isLoading, unreceivedBadges, isUnreceivedLoad
           <Typography>You have {badges?.length || 0} badge(s):</Typography>
         )}
 
-        <Stack direction="row" gap={2} flexWrap="wrap">
-          {badges?.map((badge) => (
-            <Tooltip key={badge.id} title={badge.title + (badge.description ? " - " + badge.description : "")} placement="top" arrow>
-              <Box component="img" src={getBadgeImage(badge)} width={96} height={96} />
-            </Tooltip>
-          ))}
-        </Stack>
+        <BadgeGrid badges={badges} />
 
         <Typography variant="h4">Left to unlock:</Typography>
         <DividerDark />
@@ -47,13 +41,7 @@ const UserBadgesPanel = ({ badges, isLoading, unreceivedBadges, isUnreceivedLoad
           </Box>
         )}
 
-        <Stack direction="row" gap={2} flexWrap="wrap">
-          {unreceivedBadges?.map((badge) => (
-            <Tooltip key={badge.id} title={badge.title + (badge.description ? " - " + badge.description : "")} placement="top" arrow>
-              <Box component="img" src={getBadgeImage(badge)} width={96} height={96} />
-            </Tooltip>
-          ))}
-        </Stack>
+        <BadgeGrid badges={unreceivedBadges} grayOut={true} />
       </Stack>
     </WrapPaper>
   );

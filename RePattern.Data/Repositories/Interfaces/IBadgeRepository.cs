@@ -5,5 +5,6 @@ namespace RePattern.Data.Repositories.Interfaces
 {
     public interface IBadgeRepository : IRepository<Badge>
     {
+        Task<Badge?> GetCategoryCompleteTrackingBadgeAsync(int categoryId, CancellationToken cancellationToken);
     }
 }

@@ -12,8 +12,8 @@ namespace RePattern.Data.Repositories.Concrete
         public async Task<List<BadgeWithCategoryInfo>> GetHighestAcquiredBadgesPerGroupAsync(int userId, CancellationToken cancellationToken)
         {
             return await _dbContext.BadgeAcquisitions
-                .Where(x => x.UserId == userId)
-                .GroupBy(x => x.Badge.BadgeGroupId)
+                .Where(aq => aq.UserId == userId)
+                .GroupBy(aq => aq.Badge.BadgeGroupId)
                 .Select(g => g
                     .OrderByDescending(x => x.Badge.Tier)
                     .Select(x => new BadgeWithCategoryInfo
@@ -43,6 +43,29 @@ namespace RePattern.Data.Repositories.Concrete
                         AcquiredAt = default
                     })
                     .First())
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<List<Badge>> GetAcquiredTrackingBadgesByCategoryAsync(int userId, int categoryId, CancellationToken cancellationToken)
+        {
+            return await _dbContext.BadgeAcquisitions
+                .Where(aq =>
+                    aq.UserId == userId &&
+                    aq.Badge.BadgeGroup.IsTrackingGroup &&
+                    aq.Badge.BadgeGroup.CategoryId == categoryId)
+                .Select(aq => aq.Badge)
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<List<Badge>> GetUnacquiredTrackingBadgesByCategoryAsync(int userId, int categoryId, CancellationToken cancellationToken)
+        {
+            return await _dbContext.Badges
+                .Where(b =>
+                    b.BadgeGroup.IsTrackingGroup &&
+                    b.BadgeGroup.CategoryId == categoryId &&
+                    !b.BadgeAcquisitions.Any(a => a.UserId == userId))
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }

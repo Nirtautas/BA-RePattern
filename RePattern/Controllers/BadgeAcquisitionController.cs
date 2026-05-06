@@ -9,20 +9,65 @@ namespace RePattern.Api.Controllers
     public class BadgeAcquisitionController(IBadgeAcquisitionService badgeAcquisitionService, IUserService userService) : ControllerBase
     {
         [Authorize]
-        [HttpGet("me")]
-        public async Task<IActionResult> GetAllHighestReceivedBadges(CancellationToken cancellationToken)
+        [HttpGet("me/acquired-highest")]
+        public async Task<IActionResult> GetAllHighestAcquiredBadges(CancellationToken cancellationToken)
         {
             var user = await userService.GetCurrentUserAsync(User, cancellationToken);
-            var response = await badgeAcquisitionService.GetHighestReceivedBadgeFromEachBadgeGroupAsync(user.Id, cancellationToken);
+            var response = await badgeAcquisitionService.GetHighestAcquiredBadgeFromEachBadgeGroupAsync(user.Id, cancellationToken);
             return Ok(response);
         }
 
         [Authorize]
-        [HttpGet("me/unreceived")]
-        public async Task<IActionResult> GetAllLowestUnreceivedBadges(CancellationToken cancellationToken)
+        [HttpGet("me/unacquired-lowest")]
+        public async Task<IActionResult> GetAllLowestUnacquiredBadges(CancellationToken cancellationToken)
         {
             var user = await userService.GetCurrentUserAsync(User, cancellationToken);
-            var response = await badgeAcquisitionService.GetLowestUnreceivedBadgesPerGroupAsync(user.Id, cancellationToken);
+            var response = await badgeAcquisitionService.GetLowestUnacquiredBadgesPerGroupAsync(user.Id, cancellationToken);
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpPost("me/category/{categoryId:int}/category-complete-badge")]
+        public async Task<IActionResult> AcquireCategoryCompleteTrackingBadge(int categoryId, CancellationToken cancellationToken)
+        {
+            var user = await userService.GetCurrentUserAsync(User, cancellationToken);
+
+            var response = await badgeAcquisitionService.AcquireCategoryCompleteTrackingBadgeAsync(
+                user.Id,
+                categoryId,
+                cancellationToken
+            );
+
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("me/category/{categoryId:int}/tracking/acquired-badges")]
+        public async Task<IActionResult> GetAcquiredTrackingBadgesByCategory(int categoryId, CancellationToken cancellationToken)
+        {
+            var user = await userService.GetCurrentUserAsync(User, cancellationToken);
+
+            var response = await badgeAcquisitionService.GetAcquiredTrackingBadgesByCategoryAsync(
+                    user.Id,
+                    categoryId,
+                    cancellationToken
+                );
+
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("me/category/{categoryId:int}/tracking/unacquired-badges")]
+        public async Task<IActionResult> GetUnacquiredTrackingBadgesByCategory(int categoryId, CancellationToken cancellationToken)
+        {
+            var user = await userService.GetCurrentUserAsync(User, cancellationToken);
+
+            var response = await badgeAcquisitionService.GetUnacquiredTrackingBadgesByCategoryAsync(
+                    user.Id,
+                    categoryId,
+                    cancellationToken
+                );
+
             return Ok(response);
         }
     }

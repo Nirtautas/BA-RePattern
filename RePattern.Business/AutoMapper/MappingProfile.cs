@@ -34,6 +34,8 @@ namespace RePattern.Business.AutoMapper
                     opt => opt.MapFrom(src => src.CategoryId))
                 .ForMember(dest => dest.IsTrackingGroup,
                     opt => opt.MapFrom(src => src.IsTrackingGroup));
+
+            CreateMap<Badge, BadgeResponse>();
         }
     }
 }

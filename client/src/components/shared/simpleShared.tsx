@@ -77,7 +77,6 @@ const WrapPaper = ({ children, sx }: WrapPaperProps) => {
     <Paper
       sx={{
         padding: 2,
-        marginTop: 2,
         border: 1,
         borderColor: "primary.main",
         ...sx,

@@ -10,7 +10,7 @@ namespace RePattern.Domain.Entities
         [Key]
         public int Id { get; set; }
 
-        public required BadgeRuleType RuleType { get; set; }
+        public required BadgeRuleTypeEnum RuleType { get; set; }
         public int? Threshold { get; set; }
 
         public virtual ICollection<Badge> Badges { get; set; }
