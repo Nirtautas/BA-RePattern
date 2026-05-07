@@ -24,6 +24,7 @@ export default function MuiThemeProvider({ children }: { children: React.ReactNo
       },
       info: {
         main: "#5F56FF",
+        light: "#746dff",
       },
     },
     typography: {

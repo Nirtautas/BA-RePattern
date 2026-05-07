@@ -37,19 +37,19 @@ const useAcquireCategoryCompleteTrackingBadge = () => {
   });
 };
 
-export const useAcquiredTrackingBadgesByCategory = (categoryId: number) => {
+export const useAcquiredTrackingBadgesByCategory = (categoryId: number, enabled: boolean = false) => {
   return useQuery({
     queryKey: badgeAcquisitionKeys.acquiredTrackingBadgesByCategory(categoryId),
     queryFn: () => getAcquiredTrackingBadgesByCategory(categoryId),
-    enabled: !!categoryId,
+    enabled: !!categoryId && enabled,
   });
 };
 
-export const useUnacquiredTrackingBadgesByCategory = (categoryId: number) => {
+export const useUnacquiredTrackingBadgesByCategory = (categoryId: number, enabled: boolean = false) => {
   return useQuery({
     queryKey: badgeAcquisitionKeys.unacquiredTrackingBadgesByCategory(categoryId),
     queryFn: () => getUnacquiredTrackingBadgesByCategory(categoryId),
-    enabled: !!categoryId,
+    enabled: !!categoryId && enabled,
   });
 };
 

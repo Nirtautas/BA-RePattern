@@ -11,6 +11,8 @@ namespace RePattern.Domain.Entities
         public int Id { get; set; }
 
         public required string Description { get; set; }
+        [MaxLength(255)]
+        public string? ShortText { get; set; }
         public string? Hint { get; set; }
         public TestQuestionDifficultyEnum Difficulty { get; set; }
         public required TestQuestionTypeEnum Type { get; set; }

@@ -8,7 +8,10 @@
             new BadgeGroupSeeder(),
             new BadgeRuleSeeder(),
             new BadgeSeeder(),
-            new BadgeAcquisitionSeeder() //REMOVE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            new BadgeAcquisitionSeeder(), //REMOVE LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            new TestSeeder(),
+            new TestQuestionSeeder(),
+            new AnswerSeeder()
         };
 
         public static void Seed(ApplicationDbContext context)

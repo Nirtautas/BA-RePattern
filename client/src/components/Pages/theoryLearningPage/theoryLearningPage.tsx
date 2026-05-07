@@ -1,8 +1,11 @@
 import WrapPaper, { DividerDark, ToLearningEnvironment } from "@/components/shared/simpleShared";
 import { useAcquireCategoryCompleteTrackingBadge, useAcquiredTrackingBadgesByCategory, useUnacquiredTrackingBadgesByCategory } from "@/data/api/features/badgeAcquisition/badgeAcquisitionHooks";
 import { CategoryResponse } from "@/data/api/features/category/categoryTypes";
+import { useCurrentUser } from "@/data/api/features/user/userHooks";
 import { theoryComponentMap } from "@/data/commonTypes";
+import { getPageUrl } from "@/data/constants";
 import { Box, Button, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import BadgeGrid from "../learnDashboardPage/badgeGrid";
 
 type Props = {
@@ -10,9 +13,12 @@ type Props = {
 };
 
 const TheoryLearningPage = ({ category }: Props) => {
+  const router = useRouter();
   const Component = theoryComponentMap[category.uniquePathFragment];
-  const { data: acquiredTrackingBadges, isLoading: acquiredLoading } = useAcquiredTrackingBadgesByCategory(category.id);
-  const { data: unacquiredTrackingBadges, isLoading: unacquiredLoading } = useUnacquiredTrackingBadgesByCategory(category.id);
+  const { data: user, isLoading: isUserLoading } = useCurrentUser();
+  const isLoggedIn = !!user;
+  const { data: acquiredTrackingBadges, isLoading: acquiredLoading } = useAcquiredTrackingBadgesByCategory(category.id, !isUserLoading && isLoggedIn);
+  const { data: unacquiredTrackingBadges, isLoading: unacquiredLoading } = useUnacquiredTrackingBadgesByCategory(category.id, !isUserLoading && isLoggedIn);
   const { mutate: acquireBadge, isPending } = useAcquireCategoryCompleteTrackingBadge();
 
   return (
@@ -31,9 +37,9 @@ const TheoryLearningPage = ({ category }: Props) => {
                 <Typography>Loading badges...</Typography>
               ) : (
                 <Stack direction="row" gap={1} alignItems="center">
-                  <Typography variant="h6">Badge information:</Typography>
-                  {acquiredTrackingBadges && <BadgeGrid badges={acquiredTrackingBadges.sort((a, b) => a.tier - b.tier)} />}
-                  {unacquiredTrackingBadges && <BadgeGrid badges={unacquiredTrackingBadges.sort((a, b) => a.tier - b.tier)} grayOut={true} />}
+                  {(acquiredTrackingBadges || unacquiredTrackingBadges) && <Typography variant="h6">Badge information:</Typography>}
+                  <BadgeGrid badges={[...(acquiredTrackingBadges ?? [])].sort((a, b) => a.tier - b.tier)} />
+                  <BadgeGrid badges={[...(unacquiredTrackingBadges ?? [])].sort((a, b) => a.tier - b.tier)} grayOut={true} />
                 </Stack>
               )}
 
@@ -42,7 +48,7 @@ const TheoryLearningPage = ({ category }: Props) => {
                   {(acquiredTrackingBadges?.length ?? 0) > 0 ? "Already marked as completed" : isPending ? "Completing..." : "Mark as completed"}
                 </Button>
               ) : (
-                <Button variant="contained" color="success" sx={{ color: "primary.light" }}>
+                <Button variant="contained" color="success" onClick={() => router.push(getPageUrl.categoryTest(category.id))} sx={{ color: "primary.light" }}>
                   Take test
                 </Button>
               )}

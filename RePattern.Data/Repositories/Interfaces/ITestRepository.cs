@@ -5,5 +5,6 @@ namespace RePattern.Data.Repositories.Interfaces
 {
     public interface ITestRepository : IRepository<Test>
     {
+        Task<Test?> GetCategoryTestWithQuestionsAsync(int categoryId, CancellationToken cancellationToken);
     }
 }

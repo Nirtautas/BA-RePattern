@@ -11,7 +11,7 @@ export const getPageUrl = {
     learnTheory: (uniquePathFragment: string) => `${getPageUrl.learnDashboard()}/${uniquePathFragment}/theory`,
     learnInteractive: (uniquePathFragment: string) => `${getPageUrl.learnDashboard()}/${uniquePathFragment}/interactive`,
     interactivePage: (uniquePathFragment: string) => `${INTERACTIVE_WEBSITE_URL}/${uniquePathFragment}/reset`,
-    categoryTest: (uniquePathFragment: string) => `/tests/category/${uniquePathFragment}`,
+    categoryTest: (categoryId: number) => `/tests/category/${categoryId}`,
     periodicTest: () => `/tests/periodic/`,
     testExecutionResult: (executionId: number) => `/tests/execution/${executionId}`,
 };

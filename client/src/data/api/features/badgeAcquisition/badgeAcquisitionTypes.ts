@@ -5,7 +5,7 @@ export type BadgeWithCategoryInfo = BadgeResponse & {
 };
 
 export type BadgeResponse = {
-    id: number;
+  id: number;
   title: string;
   description: string,
   tier: number,

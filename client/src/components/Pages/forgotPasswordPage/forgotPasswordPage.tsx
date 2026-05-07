@@ -21,8 +21,8 @@ const ForgotPasswordPage = () => {
 
   return (
     <Container maxWidth="sm">
-      <WrapPaper>
-        <Box component="form" onSubmit={handleRecover}>
+      <Box component="form" onSubmit={handleRecover} marginTop={2}>
+        <WrapPaper>
           <Stack spacing={2}>
             <Stack textAlign="center" gap={1}>
               <AppTitle />
@@ -72,8 +72,8 @@ const ForgotPasswordPage = () => {
               </Link>
             </Typography>
           </Stack>
-        </Box>
-      </WrapPaper>
+        </WrapPaper>
+      </Box>
     </Container>
   );
 };

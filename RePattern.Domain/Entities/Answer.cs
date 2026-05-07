@@ -11,9 +11,7 @@ namespace RePattern.Domain.Entities
 
         [MaxLength(255)]
         public required string Description { get; set; }
-        public required string IsCorrect { get; set; }
-        [MaxLength(255)]
-        public string? ShortText { get; set; }
+        public required bool IsCorrect { get; set; }
 
         public required int TestQuestionId { get; set; }
         public virtual TestQuestion TestQuestion { get; set; }

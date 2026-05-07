@@ -36,7 +36,7 @@ const RegisterPage = () => {
 
   return (
     <Container maxWidth="sm">
-      <Box component="form" onSubmit={handleRegistration}>
+      <Box component="form" onSubmit={handleRegistration} marginTop={2}>
         <WrapPaper>
           <Stack spacing={2} textAlign="center">
             <AppTitle />

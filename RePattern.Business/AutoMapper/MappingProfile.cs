@@ -2,6 +2,7 @@
 using RePattern.Business.Dtos.Auth;
 using RePattern.Business.Dtos.BadgeAcquisition;
 using RePattern.Business.Dtos.Category;
+using RePattern.Business.Dtos.Test;
 using RePattern.Data.Identity;
 using RePattern.Data.Repositories.JoinQueryEntities;
 using RePattern.Domain.Entities;
@@ -36,6 +37,10 @@ namespace RePattern.Business.AutoMapper
                     opt => opt.MapFrom(src => src.IsTrackingGroup));
 
             CreateMap<Badge, BadgeResponse>();
+
+            CreateMap<Test, TestTakingResponse>();
+            CreateMap<TestQuestion, TestQuestionTakingResponse>();
+            CreateMap<Answer, AnswerTakingResponse>();
         }
     }
 }

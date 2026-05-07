@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RePattern.Data.Database;
@@ -11,9 +12,11 @@ using RePattern.Data.Database;
 namespace RePattern.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260507074020_ShortText")]
+    partial class ShortText
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,8 +240,9 @@ namespace RePattern.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("boolean");
+                    b.Property<string>("IsCorrect")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("TestQuestionId")
                         .HasColumnType("integer");

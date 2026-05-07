@@ -6,7 +6,7 @@ namespace RePattern.Api.Controllers
 {
     [Route("api/categories")]
     [ApiController]
-    public class CategoryController(ICategoryService categoryService) : Controller
+    public class CategoryController(ICategoryService categoryService) : ControllerBase
     {
         [AllowAnonymous]
         [HttpGet]

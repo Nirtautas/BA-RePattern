@@ -29,7 +29,7 @@ const LoginPage = () => {
 
   return (
     <Container maxWidth="sm">
-      <Box component="form" onSubmit={handleLogin}>
+      <Box component="form" onSubmit={handleLogin} marginTop={2}>
         <WrapPaper>
           <Stack spacing={2} textAlign="center">
             <AppTitle />

@@ -30,6 +30,35 @@ export enum BadgeTierEnum {
   GOLD = 3,
 };
 
+export enum TestTypeEnum {
+  CATEGORY = 0,
+  SPACED = 1,
+};
+
+export enum TestQuestionDifficultyEnum {
+  EASY = 0,
+  NORMAL = 1,
+  HARD = 2
+};
+
+export const difficultyMap: Record<TestQuestionDifficultyEnum, string> = {
+  [TestQuestionDifficultyEnum.EASY]: "Easy",
+  [TestQuestionDifficultyEnum.NORMAL]: "Medium",
+  [TestQuestionDifficultyEnum.HARD]: "Hard",
+};
+
+export const difficultyColorMap: Record<TestQuestionDifficultyEnum, "success" | "warning" | "error"> = {
+  [TestQuestionDifficultyEnum.EASY]: "success",
+  [TestQuestionDifficultyEnum.NORMAL]: "warning",
+  [TestQuestionDifficultyEnum.HARD]: "error",
+};
+
+export enum TestQuestionTypeEnum {
+  SINGLE_SELECT = 0,
+  MULTI_SELECT = 1,
+  SHORT_TEXT = 2
+};
+
 export const BadgeTierMap: Record<BadgeTierEnum, string> = {
   [BadgeTierEnum.NO_TIER]: `${BACKEND_BASE_URL}/images/badges/placeholder/notier.png`,
   [BadgeTierEnum.BRONZE]: `${BACKEND_BASE_URL}/images/badges/placeholder/bronze.png`,

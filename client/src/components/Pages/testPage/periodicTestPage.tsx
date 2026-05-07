@@ -1,11 +1,16 @@
 "use client";
 
-import { Container, Typography } from "@mui/material";
+import WrapPaper from "@/components/shared/simpleShared";
+import { Container, Stack, Typography } from "@mui/material";
 
 const PeriodicTestPage = () => {
   return (
-    <Container>
-      <Typography>Periodic test page</Typography>
+    <Container maxWidth="md">
+      <WrapPaper sx={{ marginTop: 2 }}>
+        <Stack direction="column" alignItems="center">
+          <Typography>Periodic test page</Typography>
+        </Stack>
+      </WrapPaper>
     </Container>
   );
 };

@@ -55,7 +55,7 @@ namespace RePattern.Data.Database
                 .Property(q => q.Difficulty)
                 .HasDefaultValue(TestQuestionDifficultyEnum.EASY);
 
-            modelBuilder.Entity<Answer>()
+            modelBuilder.Entity<TestQuestion>()
                 .Property(q => q.ShortText)
                 .HasDefaultValue(null);
 
