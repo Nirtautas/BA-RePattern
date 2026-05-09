@@ -22,8 +22,7 @@ namespace RePattern.Data.Database
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany<TestExecution>()
                 .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired();
+                .HasForeignKey(e => e.UserId);
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany<BadgeAcquisition>()

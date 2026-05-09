@@ -7,7 +7,7 @@ namespace RePattern.Domain.Entities
     [PrimaryKey(nameof(QuestionAttemptId), nameof(AnswerId))]
     public class SelectedAnswers
     {
-        public required int QuestionAttemptId { get; set; }
+        public int QuestionAttemptId { get; set; }
         public virtual QuestionAttempt QuestionAttempt { get; set; }
         public required int AnswerId { get; set; }
         public virtual Answer Answer { get; set; }

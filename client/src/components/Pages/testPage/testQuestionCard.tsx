@@ -2,20 +2,22 @@
 
 import WrapPaper, { DividerDark } from "@/components/shared/simpleShared";
 import { TestQuestionTakingResponse } from "@/data/api/features/test/testTypes";
-import { difficultyColorMap, difficultyMap, TestQuestionDifficultyEnum, TestQuestionTypeEnum } from "@/data/commonTypes";
+import { difficultyColorMap, difficultyMap, TestAnswerState, TestQuestionDifficultyEnum, TestQuestionTypeEnum } from "@/data/commonTypes";
 import { BACKEND_BASE_URL } from "@/data/constants";
 import { Button, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import MultiSelectQuestion from "./multiSelectQuestion";
-import SingleSelectQuestion from "./singleSelectQuestion";
 import ShortTextQuestion from "./shortTextQuestion";
+import SingleSelectQuestion from "./singleSelectQuestion";
 
 type Props = {
   question: TestQuestionTakingResponse;
   questionNumber: number;
+  value: TestAnswerState[number];
+  onChange: (value: TestAnswerState[number]) => void;
 };
 
-const TestQuestionCard = ({ question, questionNumber }: Props) => {
+const TestQuestionCard = ({ question, questionNumber, value, onChange }: Props) => {
   const [showHint, setShowHint] = useState(false);
 
   return (
@@ -59,11 +61,11 @@ const TestQuestionCard = ({ question, questionNumber }: Props) => {
         {question.imageUrl && <img src={`${BACKEND_BASE_URL}/${question.imageUrl}`} alt="" style={{ maxWidth: "100%", maxHeight: 200, objectFit: "contain", border: "1px solid", borderRadius: 3 }} />}
         <DividerDark />
 
-        {question.type === TestQuestionTypeEnum.MULTI_SELECT && <MultiSelectQuestion question={question} />}
+        {question.type === TestQuestionTypeEnum.MULTI_SELECT && <MultiSelectQuestion question={question} value={value} onChange={onChange} />}
 
-        {question.type === TestQuestionTypeEnum.SINGLE_SELECT && <SingleSelectQuestion question={question} />}
+        {question.type === TestQuestionTypeEnum.SINGLE_SELECT && <SingleSelectQuestion question={question} value={value} onChange={onChange} />}
 
-        {question.type === TestQuestionTypeEnum.SHORT_TEXT && <ShortTextQuestion />}
+        {question.type === TestQuestionTypeEnum.SHORT_TEXT && <ShortTextQuestion value={value} onChange={onChange} />}
       </Stack>
     </WrapPaper>
   );

@@ -5,6 +5,6 @@ namespace RePattern.Business.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserResponse> GetCurrentUserAsync(ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken);
+        Task<UserResponse?> GetCurrentUserAsync(ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken);
     }
 }

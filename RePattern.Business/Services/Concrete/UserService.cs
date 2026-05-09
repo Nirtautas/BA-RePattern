@@ -11,12 +11,11 @@ namespace RePattern.Business.Services.Concrete
 {
     public class UserService(UserManager<ApplicationUser> userManager, IMapper mapper) : IUserService
     {
-        public async Task<UserResponse> GetCurrentUserAsync(ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
+        public async Task<UserResponse?> GetCurrentUserAsync(ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken)
         {
             var userId = claimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (string.IsNullOrWhiteSpace(userId))
-                throw new UnauthorizedException("User is not authenticated.");
+            if (string.IsNullOrWhiteSpace(userId)) return null;
 
             var user = await userManager.Users
                 .FirstOrDefaultAsync(u => u.Id.ToString() == userId, cancellationToken);

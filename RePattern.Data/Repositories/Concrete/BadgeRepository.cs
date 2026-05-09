@@ -9,14 +9,15 @@ namespace RePattern.Data.Repositories.Concrete
 {
     public class BadgeRepository(ApplicationDbContext dbContext) : Repository<Badge>(dbContext), IBadgeRepository
     {
-        public async Task<Badge?> GetCategoryCompleteTrackingBadgeAsync(int categoryId, CancellationToken cancellationToken)
+        public async Task<List<Badge>> GetCategoryTrackingBadgesByRuleAsync(int categoryId, BadgeRuleTypeEnum ruleType, CancellationToken cancellationToken)
         {
             return await _dbContext.Badges
+                .Include(b => b.BadgeRule)
                 .Where(b =>
                     b.BadgeGroup.IsTrackingGroup &&
                     b.BadgeGroup.CategoryId == categoryId &&
-                    b.BadgeRule.RuleType == BadgeRuleTypeEnum.CATEGORY_COMPLETE)
-                .FirstOrDefaultAsync(cancellationToken);
+                    b.BadgeRule.RuleType == ruleType)
+                .ToListAsync(cancellationToken);
         }
     }
 }

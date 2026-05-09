@@ -15,7 +15,7 @@ namespace RePattern.Domain.Entities
 
         public required int TestQuestionId { get; set; }
         public virtual TestQuestion TestQuestion { get; set; }
-        public required int TestExecutionId { get; set; }
+        public int TestExecutionId { get; set; }
         public virtual TestExecution TestExecution { get; set; }
         public virtual ICollection<SelectedAnswers> SelectedAnswers { get; set; }
     }

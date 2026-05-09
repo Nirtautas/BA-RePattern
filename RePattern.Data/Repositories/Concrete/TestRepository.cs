@@ -20,5 +20,17 @@ namespace RePattern.Data.Repositories.Concrete
                     cancellationToken
                 );
         }
+
+        public async Task<Test?> GetTestWithQuestionsByIdAsync(int testId, CancellationToken cancellationToken)
+        {
+            return await _dbContext.Tests
+                .Include(t => t.TestQuestions)
+                    .ThenInclude(q => q.Answers)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(
+                    t => t.Id == testId,
+                    cancellationToken
+                );
+        }
     }
 }

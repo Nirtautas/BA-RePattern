@@ -8,6 +8,7 @@ namespace RePattern.Business.Services.Interfaces
         Task<List<BadgeWithCategoryResponse>> GetHighestAcquiredBadgeFromEachBadgeGroupAsync(int userId, CancellationToken cancellationToken);
         Task<List<BadgeWithCategoryResponse>> GetLowestUnacquiredBadgesPerGroupAsync(int userId, CancellationToken cancellationToken);
         Task<BadgeResponse> AcquireCategoryCompleteTrackingBadgeAsync(int userId, int categoryId, CancellationToken cancellationToken);
+        Task<List<BadgeResponse>> AcquireCategoryTestCompleteTrackingBadge(int userId, int categoryId, decimal scorePercentage, CancellationToken cancellationToken);
         Task<List<BadgeResponse>> GetAcquiredTrackingBadgesByCategoryAsync(int userId, int categoryId, CancellationToken cancellationToken);
         Task<List<BadgeResponse>> GetUnacquiredTrackingBadgesByCategoryAsync(int userId, int categoryId, CancellationToken cancellationToken);
     }

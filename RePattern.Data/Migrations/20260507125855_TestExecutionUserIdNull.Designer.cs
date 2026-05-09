@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RePattern.Data.Database;
@@ -11,9 +12,11 @@ using RePattern.Data.Database;
 namespace RePattern.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260507125855_TestExecutionUserIdNull")]
+    partial class TestExecutionUserIdNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -471,19 +474,13 @@ namespace RePattern.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CompletedAt")
+                    b.Property<DateTime>("EndedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CorrectQuestionsCount")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("ScorePercentage")
-                        .HasColumnType("numeric");
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("TestId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TotalQuestionsCount")
                         .HasColumnType("integer");
 
                     b.Property<int?>("UserId")
@@ -514,9 +511,6 @@ namespace RePattern.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
-
-                    b.Property<string>("Explanation")
-                        .HasColumnType("text");
 
                     b.Property<string>("Hint")
                         .HasColumnType("text");

@@ -86,3 +86,11 @@ export const theoryComponentMap: Partial<
   "hard-to-cancel": HardToCancelTheory,
   "forced-enrollment": ForcedEnrollmentTheory,
 };
+
+export type TestAnswerState = Record<
+  number,
+  {
+    selectedAnswerIds: number[];
+    shortText?: string;
+  }
+>;

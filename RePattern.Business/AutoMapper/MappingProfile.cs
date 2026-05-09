@@ -3,6 +3,7 @@ using RePattern.Business.Dtos.Auth;
 using RePattern.Business.Dtos.BadgeAcquisition;
 using RePattern.Business.Dtos.Category;
 using RePattern.Business.Dtos.Test;
+using RePattern.Business.Dtos.TestExecution;
 using RePattern.Data.Identity;
 using RePattern.Data.Repositories.JoinQueryEntities;
 using RePattern.Domain.Entities;
@@ -41,6 +42,8 @@ namespace RePattern.Business.AutoMapper
             CreateMap<Test, TestTakingResponse>();
             CreateMap<TestQuestion, TestQuestionTakingResponse>();
             CreateMap<Answer, AnswerTakingResponse>();
+
+            CreateMap<TestExecution, TestExecutionResponse>();
         }
     }
 }

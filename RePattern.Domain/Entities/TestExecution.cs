@@ -9,10 +9,12 @@ namespace RePattern.Domain.Entities
         [Key]
         public int Id { get; set; }
 
-        public required DateTime StartedAt { get; set; }
-        public required DateTime EndedAt { get; set; }
+        public required DateTime CompletedAt { get; set; }
+        public int CorrectQuestionsCount { get; set; }
+        public int TotalQuestionsCount { get; set; }
+        public decimal ScorePercentage { get; set; }
 
-        public required int UserId { get; set; }
+        public required int? UserId { get; set; }
         public required int TestId { get; set; }
         public virtual Test Test { get; set; }
         public virtual ICollection<QuestionAttempt> QuestionAttempts { get; set; }

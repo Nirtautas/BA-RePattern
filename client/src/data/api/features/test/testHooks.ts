@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCategoryTest } from "./testApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { completeTest, getCategoryTest } from "./testApi";
+import { CompleteTestRequest } from "./testTypes";
 
 const testKeys = {
   categoryTest: (categoryId: number) => ["test", "category", categoryId] as const,
@@ -13,4 +14,13 @@ const useCategoryTest = (categoryId: number) => {
   });
 };
 
-export { testKeys, useCategoryTest };
+const useCompleteTest = () => {
+  return useMutation({
+    mutationFn: ({ testId, request, }: {
+      testId: number;
+      request: CompleteTestRequest;
+    }) => completeTest(testId, request),
+  });
+};
+
+export { testKeys, useCategoryTest, useCompleteTest };

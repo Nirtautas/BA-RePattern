@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RePattern.Data.Database;
@@ -11,9 +12,11 @@ using RePattern.Data.Database;
 namespace RePattern.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260507130121_TestExecutionAlter")]
+    partial class TestExecutionAlter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -474,16 +477,7 @@ namespace RePattern.Data.Migrations
                     b.Property<DateTime>("CompletedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("CorrectQuestionsCount")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("ScorePercentage")
-                        .HasColumnType("numeric");
-
                     b.Property<int>("TestId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TotalQuestionsCount")
                         .HasColumnType("integer");
 
                     b.Property<int?>("UserId")
@@ -514,9 +508,6 @@ namespace RePattern.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
-
-                    b.Property<string>("Explanation")
-                        .HasColumnType("text");
 
                     b.Property<string>("Hint")
                         .HasColumnType("text");

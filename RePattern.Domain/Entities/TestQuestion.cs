@@ -17,6 +17,7 @@ namespace RePattern.Domain.Entities
         public TestQuestionDifficultyEnum Difficulty { get; set; }
         public required TestQuestionTypeEnum Type { get; set; }
         public string? ImageURL { get; set; }
+        public string? Explanation { get; set; }
 
         public required int TestId { get; set; }
         public virtual Test Test { get; set; }

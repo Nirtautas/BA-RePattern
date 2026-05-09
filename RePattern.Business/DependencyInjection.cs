@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddScoped<ICategoryService, CategoryService>()
                 .AddScoped<IBadgeService, BadgeService>()
                 .AddScoped<IBadgeAcquisitionService, BadgeAcquisitionService>()
-                .AddScoped<ITestService, TestService>();
+                .AddScoped<ITestService, TestService>()
+                .AddScoped<ITestExecutionService, TestExecutionService>();
 
             return services;
         }

@@ -21,3 +21,13 @@ export type AnswerTakingResponse = {
   id: number;
   description: string;
 };
+
+export type CompleteTestRequest = {
+  answers: CompleteTestAnswerRequest[];
+};
+
+export type CompleteTestAnswerRequest = {
+  testQuestionId: number;
+  selectedAnswerIds: number[];
+  shortText?: string;
+};
