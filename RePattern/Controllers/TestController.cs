@@ -17,12 +17,32 @@ namespace RePattern.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize]
+        [HttpGet("me/periodic")]
+        public async Task<IActionResult> GetPeriodicTest(CancellationToken cancellationToken)
+        {
+            var user = await userService.GetCurrentUserAsync(User, cancellationToken);
+            var response = await testService.GetPeriodicTestAsync(user.Id, cancellationToken);
+
+            return Ok(response);
+        }
+
         [AllowAnonymous]
         [HttpPost("{testId:int}/complete")]
         public async Task<IActionResult> CompleteTest(int testId, [FromBody] CompleteTestRequest completedTestRequest, CancellationToken cancellationToken)
         {
             var user = await userService.GetCurrentUserAsync(User, cancellationToken);
             var response = await testService.HandleTestCompletion(testId, user?.Id, completedTestRequest, cancellationToken);
+
+            return Ok(response);
+        }
+
+        [Authorize]
+        [HttpGet("me/periodic/availability")]
+        public async Task<IActionResult> GetPeriodicTestAvailability(CancellationToken cancellationToken)
+        {
+            var user = await userService.GetCurrentUserAsync(User, cancellationToken);
+            var response = await testService.GetPeriodicTestAvailabilityAsync(user.Id, cancellationToken);
 
             return Ok(response);
         }

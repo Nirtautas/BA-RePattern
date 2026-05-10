@@ -5,5 +5,6 @@ namespace RePattern.Data.Repositories.Interfaces
 {
     public interface IQuestionAttemptRepository : IRepository<QuestionAttempt>
     {
+        Task<List<QuestionAttempt>> GetLatestUserQuestionAttemptsAsync(int userId, CancellationToken cancellationToken);
     }
 }

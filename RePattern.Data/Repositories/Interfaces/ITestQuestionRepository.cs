@@ -5,5 +5,6 @@ namespace RePattern.Data.Repositories.Interfaces
 {
     public interface ITestQuestionRepository : IRepository<TestQuestion>
     {
+        Task<List<TestQuestion>> GetQuestionsWithAnswersByIdsAsync(List<int> questionIds, CancellationToken cancellationToken);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace RePattern.Api.Utils;
+﻿using RePattern.Common.Exceptions.Custom;
+
+namespace RePattern.Api.Utils;
 
 public static class ConfigUtils
 {
@@ -8,9 +10,7 @@ public static class ConfigUtils
 
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new InvalidOperationException(
-                $"Missing configuration value for key '{key}'"
-            );
+            throw new ConfigValueNotFound($"Missing configuration value for key '{key}'");
         }
 
         return value;

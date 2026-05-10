@@ -17,5 +17,15 @@ namespace RePattern.Api.Controllers
 
             return Ok(execution);
         }
+
+        [Route("me/periodic/latest")]
+        [Authorize]
+        public async Task<IActionResult> GetLatestCategoryTestExecution(CancellationToken cancellationToken)
+        {
+            var user = await userService.GetCurrentUserAsync(User, cancellationToken);
+            var execution = await testExecutionService.GetLatestPeriodicTestExecutionAsync(user.Id, cancellationToken);
+
+            return Ok(execution);
+        }
     }
 }

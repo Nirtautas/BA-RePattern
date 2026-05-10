@@ -13,8 +13,8 @@ const LandingPage = () => {
       <WrapPaper sx={{ marginTop: 2 }}>
         <Stack direction="column" alignItems="center">
           <AppTitle />
-          <Typography variant="h5" marginBottom={2}>
-            An educational application for deceptive pattern identification
+          <Typography variant="h5" marginBottom={2} textAlign="center">
+            An open-source educational application for deceptive pattern identification
           </Typography>
           <Stack direction="column" alignItems="left" width="100%" gap={1}>
             <Typography variant="h5">About:</Typography>

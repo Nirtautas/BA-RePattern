@@ -1,16 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import { getLatestTestExecution } from "./testExecutionApi";
+import { getLatestCategoryTestExecution, getLatestPeriodicTestExecution, getPeriodicTestAvailability } from "./testExecutionApi";
 
 const testExecutionKeys = {
-  latestTestExecution: (categoryId: number) => ["test-executions", "me", "category", categoryId, "latest"] as const,
+  latestCategoryTestExecution: (categoryId: number) => ["test-executions", "me", "category", categoryId, "latest"] as const,
+  latestPeriodicTestExecution: () => ["test-executions", "me", "periodic", "latest"] as const,
 };
 
-const useLatestTestExecution = (categoryId: number, enabled: boolean = false) => {
+const useLatestCategoryTestExecution = (categoryId: number, enabled: boolean = false) => {
   return useQuery({
-    queryKey: testExecutionKeys.latestTestExecution(categoryId),
-    queryFn: () => getLatestTestExecution(categoryId),
+    queryKey: testExecutionKeys.latestCategoryTestExecution(categoryId),
+    queryFn: () => getLatestCategoryTestExecution(categoryId),
     enabled: enabled,
   });
 };
 
-export { useLatestTestExecution };
+const useLatestPeriodicTestExecution = (enabled: boolean = false) => {
+  return useQuery({
+    queryKey: testExecutionKeys.latestPeriodicTestExecution(),
+    queryFn: () => getLatestPeriodicTestExecution(),
+    enabled: enabled,
+  });
+};
+
+export { useLatestCategoryTestExecution, useLatestPeriodicTestExecution };

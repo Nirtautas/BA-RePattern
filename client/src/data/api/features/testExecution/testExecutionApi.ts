@@ -1,8 +1,12 @@
 import apiClient from "../../apiClient";
 import { TestExecutionResponse } from "./testExecutionTypes";
 
-const getLatestTestExecution = (categoryId: number) => {
+const getLatestCategoryTestExecution = (categoryId: number) => {
   return apiClient<TestExecutionResponse>(`/test-executions/me/category/${categoryId}/latest`);
 };
 
-export { getLatestTestExecution };
+const getLatestPeriodicTestExecution = () => {
+  return apiClient<TestExecutionResponse>(`/test-executions/me/periodic/latest`);
+};
+
+export { getLatestCategoryTestExecution, getLatestPeriodicTestExecution };

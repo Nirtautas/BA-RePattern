@@ -1,9 +1,14 @@
 import apiClient from "../../apiClient";
-import { CompleteTestRequest, TestTakingResponse } from "./testTypes";
+import { CompleteTestRequest, PeriodicTestAvailabilityResponse, TestTakingResponse } from "./testTypes";
 
 const getCategoryTest = (categoryId: number) => {
   return apiClient<TestTakingResponse>(`/tests/category/${categoryId}`);
 };
+
+const getPeriodicTest = () => {
+  return apiClient<TestTakingResponse>(`/tests/me/periodic`);
+};
+
 
 const completeTest = (testId: number, request: CompleteTestRequest) => {
   return apiClient(`/tests/${testId}/complete`, {
@@ -12,4 +17,8 @@ const completeTest = (testId: number, request: CompleteTestRequest) => {
   });
 };
 
-export { getCategoryTest, completeTest };
+const getPeriodicTestAvailability = () => {
+  return apiClient<PeriodicTestAvailabilityResponse>(`/tests/me/periodic/availability`);
+};
+
+export { getCategoryTest, getPeriodicTest, completeTest, getPeriodicTestAvailability };

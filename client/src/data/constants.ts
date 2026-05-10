@@ -13,7 +13,7 @@ export const getPageUrl = {
     interactivePage: (uniquePathFragment: string) => `${INTERACTIVE_WEBSITE_URL}/${uniquePathFragment}/reset`,
     categoryTest: (categoryId: number) => `/tests/category/${categoryId}`,
     periodicTest: () => `/tests/periodic/`,
-    testExecutionResult: (executionId: number) => `/tests/execution/${executionId}`,
+    testExecutionResult: (executionId: number) => `/tests/execution/${executionId}/result`,
 };
 
 export const BACKEND_BASE_URL = "https://localhost:5000"

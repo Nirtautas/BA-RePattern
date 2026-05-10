@@ -4,6 +4,7 @@ import WrapPaper, { DividerDark, UsageInstructionsPanel } from "@/components/sha
 import { useAllHighestReceivedBadges, useAllLowestUnreceivedBadges } from "@/data/api/features/badgeAcquisition/badgeAcquisitionHooks";
 import { useCategories } from "@/data/api/features/category/categoryHooks";
 import { Stack, Typography } from "@mui/material";
+import { PeriodicTestPanel } from "./periodicTestPanel";
 import { TopicNavigationPanel } from "./topicNavigationPanel";
 import UserBadgesPanel from "./userBadgesPanel";
 
@@ -37,6 +38,7 @@ const LoginLearnDashboardInfo = () => {
         </WrapPaper>
       )}
 
+      <PeriodicTestPanel />
       <UserBadgesPanel badges={badges} isLoading={isLoading} unreceivedBadges={unreceivedBadges} isUnreceivedLoading={isUnreceivedLoading} />
       <UsageInstructionsPanel />
     </Stack>

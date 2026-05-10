@@ -12,6 +12,7 @@
         ITestExecutionRepository TestExecutionRepository { get; }
         ITestRepository TestRepository { get; }
         IUserRepository UserRepository { get; }
+        ITestQuestionRepository TestQuestionRepository { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

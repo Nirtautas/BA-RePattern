@@ -31,3 +31,9 @@ export type CompleteTestAnswerRequest = {
   selectedAnswerIds: number[];
   shortText?: string;
 };
+
+export type PeriodicTestAvailabilityResponse = {
+    canTakeTest: boolean;
+    nextAvailableAt?: Date;
+    remainingCooldownSeconds: number;
+}

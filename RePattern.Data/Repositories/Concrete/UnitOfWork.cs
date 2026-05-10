@@ -13,7 +13,8 @@ namespace RePattern.Data.Repositories.Concrete
                         ISelectedAnswersRepository selectedAnswersRepository,
                         ITestExecutionRepository testExecutionRepository,
                         ITestRepository testRepository,
-                        IUserRepository userRepository) : IUnitOfWork
+                        IUserRepository userRepository,
+                        ITestQuestionRepository testQuestionRepository) : IUnitOfWork
     {
         public IAnswerRepository AnswerRepository { get; } = answerRepository;
         public IBadgeAcquisitionRepository BadgeAcquisitionRepository { get; } = badgeAcquisitionRepository;
@@ -25,6 +26,7 @@ namespace RePattern.Data.Repositories.Concrete
         public ITestExecutionRepository TestExecutionRepository { get; } = testExecutionRepository;
         public ITestRepository TestRepository { get; } = testRepository;
         public IUserRepository UserRepository { get; } = userRepository;
+        public ITestQuestionRepository TestQuestionRepository { get; } = testQuestionRepository;
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

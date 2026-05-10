@@ -1,9 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { completeTest, getCategoryTest } from "./testApi";
+import { completeTest, getCategoryTest, getPeriodicTest, getPeriodicTestAvailability } from "./testApi";
 import { CompleteTestRequest } from "./testTypes";
 
 const testKeys = {
-  categoryTest: (categoryId: number) => ["test", "category", categoryId] as const,
+  categoryTest: (categoryId: number) => ["tests", "category", categoryId] as const,
+  periodicTest: () => ["tests", "me", "periodic"] as const,
+  periodicTestAvailability: () => ["tests", "me", "periodic", "availability"]
 };
 
 const useCategoryTest = (categoryId: number) => {
@@ -11,6 +13,13 @@ const useCategoryTest = (categoryId: number) => {
     queryKey: testKeys.categoryTest(categoryId),
     queryFn: () => getCategoryTest(categoryId),
     enabled: !!categoryId,
+  });
+};
+
+const usePeriodicTest = () => {
+  return useQuery({
+    queryKey: testKeys.periodicTest(),
+    queryFn: () => getPeriodicTest()
   });
 };
 
@@ -23,4 +32,13 @@ const useCompleteTest = () => {
   });
 };
 
-export { testKeys, useCategoryTest, useCompleteTest };
+
+const usePeriodicTestAvailability = (enabled: boolean = false) => {
+    return useQuery({
+    queryKey: testKeys.periodicTestAvailability(),
+    queryFn: () => getPeriodicTestAvailability(),
+    enabled: enabled,
+  });
+};
+
+export { testKeys, useCategoryTest, usePeriodicTest, useCompleteTest, usePeriodicTestAvailability };
