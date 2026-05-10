@@ -6,5 +6,6 @@ namespace RePattern.Business.Services.Interfaces
     {
         Task<TestExecutionResponse> GetLatestCategoryTestExecutionAsync(int userId, int categoryId, CancellationToken cancellationToken);
         Task<TestExecutionResponse> GetLatestPeriodicTestExecutionAsync(int userId, CancellationToken cancellationToken);
+        Task<TestExecutionReviewResponse> GetExecutionReviewAsync(int executionId, int? userId, CancellationToken cancellationToken);
     }
 }

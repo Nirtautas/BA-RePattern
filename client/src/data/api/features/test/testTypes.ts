@@ -37,3 +37,7 @@ export type PeriodicTestAvailabilityResponse = {
     nextAvailableAt?: Date;
     remainingCooldownSeconds: number;
 }
+
+export type TestCompletionResponse = {
+  testExecutionId: number;
+}

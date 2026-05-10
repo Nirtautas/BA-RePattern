@@ -44,6 +44,47 @@ namespace RePattern.Business.AutoMapper
             CreateMap<Answer, AnswerTakingResponse>();
 
             CreateMap<TestExecution, TestExecutionResponse>();
+
+            CreateMap<TestExecution, TestExecutionReviewResponse>();
+
+            CreateMap<QuestionAttempt, QuestionAttemptReviewResponse>()
+                .ForMember(
+                    dest => dest.Id,
+                    opt => opt.MapFrom(src => src.TestQuestion.Id)
+                )
+                .ForMember(
+                    dest => dest.Description,
+                    opt => opt.MapFrom(src => src.TestQuestion.Description)
+                )
+                .ForMember(
+                    dest => dest.CorrectShortText,
+                    opt => opt.MapFrom(src => src.TestQuestion.ShortText)
+                )
+                .ForMember(
+                    dest => dest.Explanation,
+                    opt => opt.MapFrom(src => src.TestQuestion.Explanation)
+                )
+                .ForMember(
+                    dest => dest.Difficulty,
+                    opt => opt.MapFrom(src => src.TestQuestion.Difficulty)
+                )
+                .ForMember(
+                    dest => dest.Type,
+                    opt => opt.MapFrom(src => src.TestQuestion.Type)
+                )
+                .ForMember(
+                    dest => dest.ImageUrl,
+                    opt => opt.MapFrom(src => src.TestQuestion.ImageURL)
+                ).ForMember(
+                    dest => dest.Answers,
+                    opt => opt.MapFrom(src => src.TestQuestion.Answers)
+                );
+
+            CreateMap<Answer, AnswerReviewResponse>()
+                .ForMember(
+                    dest => dest.WasSelectedByUser,
+                    opt => opt.Ignore()
+                );
         }
     }
 }

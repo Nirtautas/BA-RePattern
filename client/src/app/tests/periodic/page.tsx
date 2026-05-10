@@ -1,4 +1,4 @@
-import PeriodicTestPage from "@/components/Pages/testPage/periodicTestPage";
+import PeriodicTestPage from "@/components/Pages/testPage/takeTest/periodicTestPage";
 
 const Page = () => {
   return <PeriodicTestPage />;

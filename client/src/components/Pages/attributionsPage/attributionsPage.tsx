@@ -2,9 +2,13 @@
 
 import WrapPaper, { DividerDark } from "@/components/shared/simpleShared";
 import SubheadingBold from "@/components/shared/subheadingBold";
-import { Container, List, ListItem, ListItemButton, ListItemText, Stack, Typography } from "@mui/material";
+import { getPageUrl } from "@/data/constants";
+import { Button, Container, List, ListItem, ListItemButton, ListItemText, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const AttributionsPage = () => {
+  const router = useRouter();
+
   return (
     <Container>
       <Stack direction="column" display="flex" alignItems="center" gap={1}>
@@ -14,9 +18,11 @@ const AttributionsPage = () => {
 
         <WrapPaper sx={{ width: 600 }}>
           <Stack direction="column" gap={1}>
-            <Typography gutterBottom>Below are attributions for the photo and theory resources used in this project:</Typography>
+            <Typography gutterBottom textAlign="center">
+              Below are the attributions for photo and theory resources used in &quot;RePattern&quot;, excluding the interactive exercise module:
+            </Typography>
             <DividerDark />
-            <SubheadingBold headingText="Scholarly articles" />
+            <SubheadingBold headingText="Scholarly articles:" />
             <List dense={true}>
               <ListItem>
                 <ListItemButton component="a" href="https://old.deceptive.design/" target="_blank" rel="noopener noreferrer">
@@ -40,6 +46,10 @@ const AttributionsPage = () => {
               </ListItem>
             </List>
           </Stack>
+          <DividerDark sx={{ marginBottom: 1 }} />
+          <Button variant="contained" fullWidth onClick={() => router.push(getPageUrl.landing())}>
+            Back to the landing page
+          </Button>
         </WrapPaper>
       </Stack>
     </Container>

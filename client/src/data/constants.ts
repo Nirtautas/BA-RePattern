@@ -21,5 +21,4 @@ export const API_BASE_URL = `${BACKEND_BASE_URL}/api`
 export const BACKEND_IMAGES_URL = `${BACKEND_BASE_URL}/images`
 export const BACKEND_PATTERN_EXAMPLE_IMAGES_URL = `${BACKEND_IMAGES_URL}/theory-images`
 export const UNAUTHORIZED = "UNAUTHORIZED"
-export const INTERACTIVE_WEBSITE_URL = "http://localhost:3000/en";
-//https://ba-usability-study-website-repatter.vercel.app
+export const INTERACTIVE_WEBSITE_URL = "https://ba-usability-study-website-repatter.vercel.app";

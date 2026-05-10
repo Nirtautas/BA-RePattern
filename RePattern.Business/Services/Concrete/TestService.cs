@@ -29,6 +29,10 @@ namespace RePattern.Business.Services.Concrete
                     throw new NotFoundException($"Question with id {question.Id} has neither a short text answer nor a correct answer.");
             }
 
+            test.TestQuestions = test.TestQuestions
+                .OrderBy(_ => Guid.NewGuid())
+                .ToList();
+
             var testResponse = mapper.Map<TestTakingResponse?>(test);
             return testResponse;
         }

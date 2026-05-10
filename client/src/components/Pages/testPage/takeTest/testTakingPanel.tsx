@@ -11,9 +11,10 @@ type Props = {
   test: TestTakingResponse;
   isSubmitting: boolean;
   onSubmit: (testId: number, request: CompleteTestRequest) => void;
+  submissionMessage?: string;
 };
 
-const TestTakingPanel = ({ test, isSubmitting, onSubmit }: Props) => {
+const TestTakingPanel = ({ test, isSubmitting, onSubmit, submissionMessage }: Props) => {
   const [selectedAnswers, setSelectedAnswers] = useState<TestAnswerState>({});
   const [uiError, setUiError] = useState<string>("");
 
@@ -52,7 +53,7 @@ const TestTakingPanel = ({ test, isSubmitting, onSubmit }: Props) => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <WrapPaper sx={{ marginBlock: 2 }}>
         <Stack direction="column" alignItems="center" gap={1}>
           <Typography variant="h4">{test.title}</Typography>
@@ -71,6 +72,11 @@ const TestTakingPanel = ({ test, isSubmitting, onSubmit }: Props) => {
             {!!uiError && (
               <Typography color="error" textAlign="center">
                 {uiError}
+              </Typography>
+            )}
+            {!!submissionMessage && (
+              <Typography color="success.main" textAlign="center">
+                {submissionMessage}
               </Typography>
             )}
             <Button color="success" variant="contained" fullWidth disabled={isSubmitting} onClick={handleSubmit} sx={{ color: "primary.light" }}>

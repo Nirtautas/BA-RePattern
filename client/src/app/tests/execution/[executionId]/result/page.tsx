@@ -1,4 +1,4 @@
-import TestExecutionResultPage from "@/components/Pages/testPage/testExecutionResultPage";
+import TestExecutionResultPage from "@/components/Pages/testPage/reviewTest/testExecutionResultPage";
 
 const Page = () => {
   return <TestExecutionResultPage />;

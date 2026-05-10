@@ -11,20 +11,28 @@ namespace RePattern.Data.Database.Seeders
 
             var answers = new List<Answer>
             {
-                new() { Id = 1, Description = "Answer 1", IsCorrect = true, TestQuestionId = 1},
-                new() { Id = 2, Description = "Answer 2", IsCorrect = false, TestQuestionId = 1},
-                new() { Id = 3, Description = "Answer 3", IsCorrect = true, TestQuestionId = 1},
-                new() { Id = 4, Description = "Answer 4", IsCorrect = false, TestQuestionId = 1},
+                //Sneak into basket
+                new() { Id = 10, Description = "True", IsCorrect = true, TestQuestionId = 10},
+                new() { Id = 20, Description = "False", IsCorrect = false, TestQuestionId = 10},
 
-                new() { Id = 5, Description = "Answer 5", IsCorrect = true, TestQuestionId = 2},
-                new() { Id = 6, Description = "Answer 6", IsCorrect = true, TestQuestionId = 2},
-                new() { Id = 7, Description = "Answer 7", IsCorrect = true, TestQuestionId = 2},
-                new() { Id = 8, Description = "Answer 8", IsCorrect = true, TestQuestionId = 2},
+                new() { Id = 30, Description = "True", IsCorrect = false, TestQuestionId = 20},
+                new() { Id = 40, Description = "False", IsCorrect = true, TestQuestionId = 20},
 
-                new() { Id = 9, Description = "Answer 9", IsCorrect = true, TestQuestionId = 3},
-                new() { Id = 10, Description = "Answer 10", IsCorrect = false, TestQuestionId = 3},
-                new() { Id = 11, Description = "Answer 11", IsCorrect = false, TestQuestionId = 3},
-                new() { Id = 12, Description = "Answer 12", IsCorrect = false, TestQuestionId = 3},
+                new() { Id = 50, Description = "True", IsCorrect = false, TestQuestionId = 30},
+                new() { Id = 60, Description = "False", IsCorrect = true, TestQuestionId = 30},
+
+                new() { Id = 70, Description = "Number 1", IsCorrect = false, TestQuestionId = 40},
+                new() { Id = 80, Description = "Number 2", IsCorrect = false, TestQuestionId = 40},
+                new() { Id = 90, Description = "Number 3", IsCorrect = false, TestQuestionId = 40},
+                new() { Id = 100, Description = "Number 4", IsCorrect = true, TestQuestionId = 40},
+
+                new() { Id = 110, Description = "Yes", IsCorrect = false, TestQuestionId = 50},
+                new() { Id = 120, Description = "No", IsCorrect = true, TestQuestionId = 50},
+
+                new() { Id = 130, Description = "Is sneaky in nature", IsCorrect = true, TestQuestionId = 70},
+                new() { Id = 140, Description = "Urges you to buy something", IsCorrect = false, TestQuestionId = 70},
+                new() { Id = 150, Description = "Uses preselection", IsCorrect = true, TestQuestionId = 70},
+                new() { Id = 160, Description = "Forces to disclose personal data", IsCorrect = false, TestQuestionId = 70},
             };
 
             context.Answers.AddRange(answers);

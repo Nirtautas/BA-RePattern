@@ -1,5 +1,5 @@
 import apiClient from "../../apiClient";
-import { CompleteTestRequest, PeriodicTestAvailabilityResponse, TestTakingResponse } from "./testTypes";
+import { CompleteTestRequest, PeriodicTestAvailabilityResponse, TestCompletionResponse, TestTakingResponse } from "./testTypes";
 
 const getCategoryTest = (categoryId: number) => {
   return apiClient<TestTakingResponse>(`/tests/category/${categoryId}`);
@@ -11,7 +11,7 @@ const getPeriodicTest = () => {
 
 
 const completeTest = (testId: number, request: CompleteTestRequest) => {
-  return apiClient(`/tests/${testId}/complete`, {
+  return apiClient<TestCompletionResponse>(`/tests/${testId}/complete`, {
     method: "POST",
     body: JSON.stringify(request),
   });

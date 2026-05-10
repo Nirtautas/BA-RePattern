@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getLatestCategoryTestExecution, getLatestPeriodicTestExecution, getPeriodicTestAvailability } from "./testExecutionApi";
+import { getExecutionReview, getLatestCategoryTestExecution, getLatestPeriodicTestExecution } from "./testExecutionApi";
 
 const testExecutionKeys = {
   latestCategoryTestExecution: (categoryId: number) => ["test-executions", "me", "category", categoryId, "latest"] as const,
   latestPeriodicTestExecution: () => ["test-executions", "me", "periodic", "latest"] as const,
+  executionReview: (executionId: number) => ["test-executions", executionId] as const
 };
 
 const useLatestCategoryTestExecution = (categoryId: number, enabled: boolean = false) => {
@@ -22,4 +23,11 @@ const useLatestPeriodicTestExecution = (enabled: boolean = false) => {
   });
 };
 
-export { useLatestCategoryTestExecution, useLatestPeriodicTestExecution };
+const useExecutionReview = (executionId: number) => {
+    return useQuery({
+    queryKey: testExecutionKeys.executionReview(executionId),
+    queryFn: () => getExecutionReview(executionId),
+  });
+}
+
+export { useLatestCategoryTestExecution, useLatestPeriodicTestExecution, useExecutionReview };

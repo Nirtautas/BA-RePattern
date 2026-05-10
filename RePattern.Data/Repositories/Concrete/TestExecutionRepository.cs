@@ -14,6 +14,7 @@ namespace RePattern.Data.Repositories.Concrete
             return await _dbContext.TestExecutions
                 .Where(te => te.UserId == userId && te.Test.CategoryId == categoryId)
                 .OrderByDescending(te => te.CompletedAt)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
@@ -22,7 +23,20 @@ namespace RePattern.Data.Repositories.Concrete
             return await _dbContext.TestExecutions
                 .Where(te => te.UserId == userId && te.Test.CategoryId == null && te.Test.Type == TestTypeEnum.SPACED)
                 .OrderByDescending(te => te.CompletedAt)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<TestExecution?> GetExecutionReviewAsync(int executionId, CancellationToken cancellationToken)
+        {
+            return await _dbContext.TestExecutions
+                .Include(x => x.QuestionAttempts)
+                    .ThenInclude(x => x.TestQuestion)
+                        .ThenInclude(x => x.Answers)
+                .Include(x => x.QuestionAttempts)
+                    .ThenInclude(x => x.SelectedAnswers)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == executionId, cancellationToken);
         }
     }
 }

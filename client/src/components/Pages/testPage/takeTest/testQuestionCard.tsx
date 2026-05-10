@@ -58,7 +58,7 @@ const TestQuestionCard = ({ question, questionNumber, value, onChange }: Props) 
 
         <DividerDark />
         <Typography textAlign="center">{question.description}</Typography>
-        {question.imageUrl && <img src={`${BACKEND_BASE_URL}/${question.imageUrl}`} alt="" style={{ maxWidth: "100%", maxHeight: 200, objectFit: "contain", border: "1px solid", borderRadius: 3 }} />}
+        {question.imageUrl && <img src={`${BACKEND_BASE_URL}/${question.imageUrl}`} alt="" style={{ maxWidth: "100%", maxHeight: 400, objectFit: "contain", border: "1px solid", borderRadius: 3 }} />}
         <DividerDark />
 
         {question.type === TestQuestionTypeEnum.MULTI_SELECT && <MultiSelectQuestion question={question} value={value} onChange={onChange} />}
