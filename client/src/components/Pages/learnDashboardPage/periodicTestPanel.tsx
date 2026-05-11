@@ -37,7 +37,11 @@ export const PeriodicTestPanel = () => {
       <Stack direction="column" gap={1}>
         {testAvailabilityLoading ? (
           <Typography>Loading periodic test availability...</Typography>
-        ) : testAvailability?.canTakeTest ? (
+        ) : !testAvailability?.hasQuestionHistory ? (
+          <Typography variant="h4" textAlign="center">
+            Complete some tests first to unlock periodic reviews!
+          </Typography>
+        ) : testAvailability.canTakeTest ? (
           <Typography variant="h4">Time to refresh your memory!</Typography>
         ) : (
           <Typography variant="h4">Periodic test is on cooldown!</Typography>
@@ -47,9 +51,12 @@ export const PeriodicTestPanel = () => {
 
         {testAvailabilityLoading ? (
           <Typography>Loading periodic test availability...</Typography>
-        ) : testAvailability?.canTakeTest ? (
-          <></>
-        ) : (
+        ) : !testAvailability?.hasQuestionHistory ? (
+          <Stack direction="column" gap={1}>
+            <Typography textAlign="center">Periodic tests are generated from your previous answers, prioritizing mistakes.</Typography>
+            <DividerDark />
+          </Stack>
+        ) : testAvailability.canTakeTest ? null : (
           <Stack direction="column" gap={1}>
             <Typography textAlign="center">
               Available in - {String(hours).padStart(2, "0")}h:{String(minutes).padStart(2, "0")}m:{String(seconds).padStart(2, "0")}s
@@ -83,7 +90,7 @@ export const PeriodicTestPanel = () => {
           variant="contained"
           onClick={() => router.push(getPageUrl.periodicTest())}
           color="primary"
-          disabled={testAvailabilityLoading || !testAvailability?.canTakeTest}
+          disabled={testAvailabilityLoading || !testAvailability?.canTakeTest || !testAvailability?.hasQuestionHistory}
           sx={{
             backgroundColor: "success.main",
             "&:hover": {

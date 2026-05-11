@@ -33,6 +33,13 @@ namespace RePattern.Business.Services.Concrete
                 .OrderBy(_ => Guid.NewGuid())
                 .ToList();
 
+            foreach (var question in test.TestQuestions)
+            {
+                question.Answers = question.Answers
+                    .OrderBy(_ => Guid.NewGuid())
+                    .ToList();
+            }
+
             var testResponse = mapper.Map<TestTakingResponse?>(test);
             return testResponse;
         }
@@ -65,6 +72,13 @@ namespace RePattern.Business.Services.Concrete
                 .Concat(fillerQuestions)
                 .OrderBy(_ => Guid.NewGuid())
                 .ToList();
+
+            foreach (var question in selectedQuestions)
+            {
+                question.Answers = question.Answers
+                    .OrderBy(_ => Guid.NewGuid())
+                    .ToList();
+            }
 
             if (selectedQuestions.Count == 0)
                 throw new NotFoundException("Unable to generate a periodic test as no category tests have been completed previously!");
@@ -161,12 +175,26 @@ namespace RePattern.Business.Services.Concrete
             var cooldownSeconds = configuration.GetValue<int?>("PeriodicTests:NextTestIntervalSeconds")
                 ?? throw new ConfigValueNotFound("No configuration value for \"PeriodicTests:NextTestIntervalSeconds\" is specified!");
 
+            var questionAttempts = await unitOfWork.QuestionAttemptRepository.GetAllByExpressionAsync(qa => qa.TestExecution.UserId == userId, cancellationToken);
+
+            if (questionAttempts is null || questionAttempts.Count == 0)
+            {
+                return new PeriodicTestAvailabilityResponse
+                {
+                    HasQuestionHistory = false,
+                    CanTakeTest = false,
+                    NextAvailableAt = null,
+                    RemainingCooldownSeconds = 0
+                };
+            }
+
             var latestPeriodicExecution = await unitOfWork.TestExecutionRepository.GetLatestPeriodicByUserIdAsync(userId, cancellationToken);
 
             if (latestPeriodicExecution is null)
             {
                 return new PeriodicTestAvailabilityResponse
                 {
+                    HasQuestionHistory = true,
                     CanTakeTest = true,
                     NextAvailableAt = null,
                     RemainingCooldownSeconds = 0
@@ -179,6 +207,7 @@ namespace RePattern.Business.Services.Concrete
 
             return new PeriodicTestAvailabilityResponse
             {
+                HasQuestionHistory = true,
                 CanTakeTest = canTakeTest,
                 NextAvailableAt = nextAvailableAt,
                 RemainingCooldownSeconds = canTakeTest ? 0 : (int)Math.Ceiling((nextAvailableAt - now).TotalSeconds)

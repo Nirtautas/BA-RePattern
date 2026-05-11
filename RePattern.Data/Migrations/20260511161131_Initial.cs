@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace RePattern.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -191,28 +191,20 @@ namespace RePattern.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Badge",
+                name: "BadgeGroup",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Tier = table.Column<int>(type: "integer", nullable: false),
-                    ImageURL = table.Column<string>(type: "text", nullable: true),
-                    CategoryId = table.Column<int>(type: "integer", nullable: true),
-                    BadgeRuleId = table.Column<int>(type: "integer", nullable: false)
+                    IsTrackingGroup = table.Column<bool>(type: "boolean", nullable: false),
+                    CategoryId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Badge", x => x.Id);
+                    table.PrimaryKey("PK_BadgeGroup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Badge_BadgeRule_BadgeRuleId",
-                        column: x => x.BadgeRuleId,
-                        principalTable: "BadgeRule",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Badge_Category_CategoryId",
+                        name: "FK_BadgeGroup_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id");
@@ -236,6 +228,91 @@ namespace RePattern.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Badge",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Tier = table.Column<int>(type: "integer", nullable: false),
+                    ImageURL = table.Column<string>(type: "text", nullable: true),
+                    BadgeGroupId = table.Column<int>(type: "integer", nullable: false),
+                    BadgeRuleId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Badge", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Badge_BadgeGroup_BadgeGroupId",
+                        column: x => x.BadgeGroupId,
+                        principalTable: "BadgeGroup",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Badge_BadgeRule_BadgeRuleId",
+                        column: x => x.BadgeRuleId,
+                        principalTable: "BadgeRule",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TestExecution",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CompletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CorrectQuestionsCount = table.Column<int>(type: "integer", nullable: false),
+                    TotalQuestionsCount = table.Column<int>(type: "integer", nullable: false),
+                    ScorePercentage = table.Column<decimal>(type: "numeric", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    TestId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestExecution", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TestExecution_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TestExecution_Test_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Test",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TestQuestion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    ShortText = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    Hint = table.Column<string>(type: "text", nullable: true),
+                    Difficulty = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    ImageURL = table.Column<string>(type: "text", nullable: true),
+                    Explanation = table.Column<string>(type: "text", nullable: true),
+                    TestId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestQuestion", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TestQuestion_Test_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Test",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,66 +342,13 @@ namespace RePattern.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TestExecution",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StartedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EndedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    TestId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestExecution", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TestExecution_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TestExecution_Test_TestId",
-                        column: x => x.TestId,
-                        principalTable: "Test",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TestQuestion",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Hint = table.Column<string>(type: "text", nullable: true),
-                    Difficulty = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    ImageURL = table.Column<string>(type: "text", nullable: true),
-                    TestId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestQuestion", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TestQuestion_Test_TestId",
-                        column: x => x.TestId,
-                        principalTable: "Test",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Answer",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    IsCorrect = table.Column<string>(type: "text", nullable: false),
-                    ShortText = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    IsCorrect = table.Column<bool>(type: "boolean", nullable: false),
                     TestQuestionId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -433,19 +457,32 @@ namespace RePattern.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Badge_BadgeGroupId",
+                table: "Badge",
+                column: "BadgeGroupId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Badge_BadgeRuleId",
                 table: "Badge",
                 column: "BadgeRuleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Badge_CategoryId",
-                table: "Badge",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BadgeAcquisition_BadgeId",
                 table: "BadgeAcquisition",
                 column: "BadgeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BadgeGroup_CategoryId_IsTrackingGroup",
+                table: "BadgeGroup",
+                columns: new[] { "CategoryId", "IsTrackingGroup" },
+                unique: true,
+                filter: "\"IsTrackingGroup\" = true AND \"CategoryId\" IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Category_UniquePathFragment",
+                table: "Category",
+                column: "UniquePathFragment",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_QuestionAttempt_TestExecutionId",
@@ -519,6 +556,9 @@ namespace RePattern.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "QuestionAttempt");
+
+            migrationBuilder.DropTable(
+                name: "BadgeGroup");
 
             migrationBuilder.DropTable(
                 name: "BadgeRule");

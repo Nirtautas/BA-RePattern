@@ -12,8 +12,8 @@ using RePattern.Data.Database;
 namespace RePattern.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260507130121_TestExecutionAlter")]
-    partial class TestExecutionAlter
+    [Migration("20260511161131_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -477,7 +477,16 @@ namespace RePattern.Data.Migrations
                     b.Property<DateTime>("CompletedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("CorrectQuestionsCount")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("ScorePercentage")
+                        .HasColumnType("numeric");
+
                     b.Property<int>("TestId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TotalQuestionsCount")
                         .HasColumnType("integer");
 
                     b.Property<int?>("UserId")
@@ -508,6 +517,9 @@ namespace RePattern.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
+
+                    b.Property<string>("Explanation")
+                        .HasColumnType("text");
 
                     b.Property<string>("Hint")
                         .HasColumnType("text");

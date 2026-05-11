@@ -33,6 +33,7 @@ export type CompleteTestAnswerRequest = {
 };
 
 export type PeriodicTestAvailabilityResponse = {
+    hasQuestionHistory: boolean;
     canTakeTest: boolean;
     nextAvailableAt?: Date;
     remainingCooldownSeconds: number;
