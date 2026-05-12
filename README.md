@@ -4,7 +4,7 @@ This is "RePattern" - an open-source educational application for e-commerce dece
 
 Folders titled "RePattern", contain the backend .NET, while the "client" folder contains the Next.ts frontend.
 
-If you wish to deploy this application, you need to add the following environment variables:
+The application is deployed [HERE](https://ba-re-pattern.vercel.app/). If you wish to deploy this application locally, you will need to add the following environment variables:
 
 1. Frontend
    - NEXT_PUBLIC_BACKEND_BASE_URL - URL of the deployed backend API.
