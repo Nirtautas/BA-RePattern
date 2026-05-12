@@ -15,9 +15,6 @@ builder.Services.AddDataServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
-var baseUrl = ConfigUtils.GetRequiredConfigValue(builder.Configuration, "baseUrl");
-builder.WebHost.UseUrls(baseUrl);
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontEnd", policy =>
