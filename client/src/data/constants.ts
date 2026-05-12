@@ -16,9 +16,9 @@ export const getPageUrl = {
     testExecutionResult: (executionId: number) => `/tests/execution/${executionId}/result`,
 };
 
-export const BACKEND_BASE_URL = "https://localhost:5000"
+export const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL!
 export const API_BASE_URL = `${BACKEND_BASE_URL}/api`
 export const BACKEND_IMAGES_URL = `${BACKEND_BASE_URL}/images`
 export const BACKEND_PATTERN_EXAMPLE_IMAGES_URL = `${BACKEND_IMAGES_URL}/theory-images`
 export const UNAUTHORIZED = "UNAUTHORIZED"
-export const INTERACTIVE_WEBSITE_URL = "https://ba-usability-study-website-repatter.vercel.app";
+export const INTERACTIVE_WEBSITE_URL = process.env.NEXT_PUBLIC_INTERACTIVE_WEBSITE_URL;
