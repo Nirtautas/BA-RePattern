@@ -43,21 +43,21 @@ const LandingPage = () => {
               <Typography fontSize={24} textAlign="center">
                 1. Interactive, step based exercises, allowing users to experience deceptive patterns in a safe and controlled environment.
               </Typography>
-              <Box component="img" src={"images/features/feature_1.png"} alt="" style={{ maxWidth: "100%", maxHeight: 600, objectFit: "contain" }} />
+              <Box component="img" src={"/images/features/feature_1.png"} alt="" style={{ maxWidth: "100%", maxHeight: 600, objectFit: "contain" }} />
               <Typography fontSize={24} textAlign="center">
                 2. Theory tests for each included deceptive pattern, allowing users to check and deepen their knowledge.
               </Typography>
-              <Box component="img" src={"images/features/feature_2.png"} alt="" style={{ maxWidth: "100%", maxHeight: 600, objectFit: "contain" }} />
+              <Box component="img" src={"/images/features/feature_2.png"} alt="" style={{ maxWidth: "100%", maxHeight: 600, objectFit: "contain" }} />
               <Typography fontSize={24} textAlign="center">
                 3. Periodical tests, which dynamically collect questions from past mistakes, allowing users to fill their knowledge gaps.
               </Typography>
-              <Box component="img" src={"images/features/feature_3.png"} alt="" style={{ maxWidth: "100%", maxHeight: 200, objectFit: "contain" }} />
+              <Box component="img" src={"/images/features/feature_3.png"} alt="" style={{ maxWidth: "100%", maxHeight: 200, objectFit: "contain" }} />
               <Typography fontSize={24} textAlign="center">
                 4. A badge system, allowing users to receive rewards for their test performance and to track their learning progress.
               </Typography>
               <Stack direction="row" gap={1} justifyContent="center">
-                <Box component="img" src={"images/features/feature_4_1.png"} alt="" style={{ maxWidth: "100%", maxHeight: 400, objectFit: "contain" }} />
-                <Box component="img" src={"images/features/feature_4_2.png"} alt="" style={{ maxWidth: "100%", maxHeight: 400, objectFit: "contain" }} />
+                <Box component="img" src={"/images/features/feature_4_1.png"} alt="" style={{ maxWidth: "100%", maxHeight: 400, objectFit: "contain" }} />
+                <Box component="img" src={"/images/features/feature_4_2.png"} alt="" style={{ maxWidth: "100%", maxHeight: 400, objectFit: "contain" }} />
               </Stack>
             </Stack>
             <Typography variant="h5">Relevant links:</Typography>
