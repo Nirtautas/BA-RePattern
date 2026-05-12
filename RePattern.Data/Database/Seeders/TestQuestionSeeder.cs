@@ -87,7 +87,7 @@ namespace RePattern.Data.Database.Seeders
                 new() { Id = 560, Description = "Which of these deceptive patterns is the \"Forced enrollment\" one?", Hint = "Which example forces the user to disclose personal information?", Difficulty = TestQuestionDifficultyEnum.NORMAL, Type = TestQuestionTypeEnum.SINGLE_SELECT, ShortText = null, TestId = 10, ImageURL = "/images/tests/forced-enrollment/select_1.png", Explanation = "Number 1 forces users to import their address book, even though it should not be required."},
             };
 
-            context.TestQuestions.AddRange(testQuestions);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "TestQuestion", context.TestQuestions, testQuestions);
         }
     }
 }

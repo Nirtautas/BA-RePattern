@@ -23,7 +23,7 @@ namespace RePattern.Data.Database.Seeders
                 new() { Id = 10, Title = "Forced Enrollment", UniquePathFragment = "forced-enrollment", Order = 10, OnlyTheory = false },
             };
 
-            context.Categories.AddRange(categories);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "Category", context.Categories, categories);
         }
     }
 }

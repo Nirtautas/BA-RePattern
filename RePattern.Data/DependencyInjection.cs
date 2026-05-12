@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(databaseConnectionString, npgsqlOptionsAction => npgsqlOptionsAction.MigrationsAssembly("RePattern.Data"));
+                options.UseSqlServer(databaseConnectionString, sqlOptionsAction => sqlOptionsAction.MigrationsAssembly("RePattern.Data"));
                 options.UseSeeding((context, hasSchema) =>
                 {
                     var appContext = (ApplicationDbContext)context;

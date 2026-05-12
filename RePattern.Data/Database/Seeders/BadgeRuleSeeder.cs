@@ -18,7 +18,7 @@ namespace RePattern.Data.Database.Seeders
                 new() { Id = 4, RuleType = BadgeRuleTypeEnum.TEST_SCORE_AT_LEAST, Threshold = 80}
             };
 
-            context.BadgeRules.AddRange(badgeRules);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "BadgeRule", context.BadgeRules, badgeRules);
         }
     }
 }

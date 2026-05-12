@@ -11,7 +11,7 @@ namespace RePattern.Data.Database.Seeders
 
             var badgeAcquisitions = new List<BadgeAcquisition> { };
 
-            context.BadgeAcquisitions.AddRange(badgeAcquisitions);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "BadgeAcquisition", context.BadgeAcquisitions, badgeAcquisitions);
         }
     }
 }

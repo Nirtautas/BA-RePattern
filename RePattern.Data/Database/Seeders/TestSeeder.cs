@@ -24,7 +24,7 @@ namespace RePattern.Data.Database.Seeders
                 new() { Id = 10, Title = "Forced enrollment test", Type = TestTypeEnum.CATEGORY, CategoryId = 10},
             };
 
-            context.Tests.AddRange(tests);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "Test", context.Tests, tests);
         }
     }
 }

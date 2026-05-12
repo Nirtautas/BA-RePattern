@@ -19,8 +19,6 @@
             {
                 seeder.Seed(context);
             }
-
-            context.SaveChanges();
         }
     }
 }

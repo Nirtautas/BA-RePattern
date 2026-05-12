@@ -23,7 +23,7 @@ namespace RePattern.Data.Database.Seeders
                 new() { Id = 10, IsTrackingGroup = true, Title = "Forced Enrollment tracking badge", CategoryId = 10},
             };
 
-            context.BadgeGroups.AddRange(badgeGroups);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "BadgeGroup", context.BadgeGroups, badgeGroups);
         }
     }
 }

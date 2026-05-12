@@ -33,7 +33,23 @@ namespace RePattern.Data.Database
             modelBuilder.Entity<BadgeGroup>()
                 .HasIndex(x => new { x.CategoryId, x.IsTrackingGroup })
                 .IsUnique()
-                .HasFilter("\"IsTrackingGroup\" = true AND \"CategoryId\" IS NOT NULL");
+                .HasFilter("[IsTrackingGroup] = 1 AND [CategoryId] IS NOT NULL");
+
+            modelBuilder.Entity<QuestionAttempt>()
+                .HasOne(x => x.TestQuestion)
+                .WithMany(x => x.QuestionAttempts)
+                .HasForeignKey(x => x.TestQuestionId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<TestExecution>()
+                .Property(x => x.ScorePercentage)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<SelectedAnswers>()
+                .HasOne(x => x.QuestionAttempt)
+                .WithMany(x => x.SelectedAnswers)
+                .HasForeignKey(x => x.QuestionAttemptId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         private static void SetDefaults(ModelBuilder modelBuilder)

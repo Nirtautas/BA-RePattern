@@ -41,7 +41,7 @@ namespace RePattern.Data.Database.Seeders
                 new() { Id = 28, BadgeGroupId = 10, BadgeRuleId = 4, Description = "Complete the category test with a score >= 80%", Title = "Test badge for Forced Enrollment", Tier = Common.Enums.BadgeTierEnum.GOLD, ImageURL="/images/badges/forced-enrollment/gold.png"},
             };
 
-            context.Badges.AddRange(badges);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "Badge", context.Badges, badges);
         }
     }
 }

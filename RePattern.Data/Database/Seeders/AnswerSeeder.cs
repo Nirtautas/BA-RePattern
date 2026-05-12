@@ -198,7 +198,7 @@ namespace RePattern.Data.Database.Seeders
                 new() { Id = 1290, Description = "Number 4", IsCorrect = false, TestQuestionId = 560},
             };
 
-            context.Answers.AddRange(answers);
+            SeederSqlServerHelper.SeedWithIdentityInsert(context, "Answer", context.Answers, answers);
         }
     }
 }
