@@ -2,7 +2,7 @@
 
 This is "RePattern" - an open-source educational application for e-commerce deceptive pattern identification. It was developed by Nirtautas Šadauskas - a 4th year Vilnius University Software Engineering program student, aiming to attain a Bachelor's degree. The primary goal of this application is to interactively educate consumers about various deceptive patterns often found in e-commerce websites and about the means of their manipulation. The current version contains learning material for 9 deceptive patterns, with plans to add more of it in the future.
 
-Folders titled "RePattern", contain the backend .NET backend, while the "client" folder contains the Next.ts frontend.
+Folders titled "RePattern", contain the backend .NET, while the "client" folder contains the Next.ts frontend.
 
 If you wish to deploy this application, you need to add the following environment variables:
 
