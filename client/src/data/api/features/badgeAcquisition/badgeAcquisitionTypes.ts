@@ -1,5 +1,5 @@
 export type BadgeWithCategoryInfo = BadgeResponse & {
-  acquiredAt: Date;
+  acquiredAt?: Date;
   categoryId: number;
   isTrackingGroup: boolean;
 };

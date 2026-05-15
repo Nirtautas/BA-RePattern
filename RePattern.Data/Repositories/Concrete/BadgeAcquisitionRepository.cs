@@ -40,7 +40,7 @@ namespace RePattern.Data.Repositories.Concrete
                         Badge = b,
                         CategoryId = b.BadgeGroup.CategoryId,
                         IsTrackingGroup = b.BadgeGroup.IsTrackingGroup,
-                        AcquiredAt = default
+                        AcquiredAt = null
                     })
                     .First())
                 .AsNoTracking()
